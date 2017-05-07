@@ -43,6 +43,8 @@ public class Snooper extends NativeKeyAdapter {
 	private SystemTray tray;
 	private PopupMenu popup;
 	
+	private boolean paused = false;
+	
 	public Snooper() {
 		init();
 		initSystemTray();
@@ -86,14 +88,30 @@ public class Snooper extends NativeKeyAdapter {
 		
 		perHourTimer = new javax.swing.Timer(HOUR_IN_MILLI, e-> {
 			try {
-				String hourlyUpdateString = "Hourly update as of: " + Util.getCurrentDate(perHourFormat);
-				bWriter.write(hourlyUpdateString);
-				bWriter.newLine();
-				bWriter.flush(); 
+				logFile(Util.getHourly());
+				flushData();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		});
+	}
+	
+	public void logFile(String s) {
+		try {
+			bWriter.write(s);
+			bWriter.newLine();
+			bWriter.flush(); 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void flushData() {
+		try {
+			bWriter.flush(); 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} 
 	}
 	
 	//init of system tray
@@ -111,19 +129,76 @@ public class Snooper extends NativeKeyAdapter {
 		
 		popup = new PopupMenu();
 		MenuItem about = new MenuItem("About");
+		MenuItem pause = new MenuItem("Pause");
+		MenuItem openCurrentLog = new MenuItem("Open current log");
+		MenuItem clearCurrentLog = new MenuItem("Clear current log");
+		CheckboxMenuItem iconAutoSize = new CheckboxMenuItem("Icon image auto size");
 		MenuItem exit = new MenuItem("Exit");
 		
 		popup.add(about);
 		popup.addSeparator();
+		popup.add(pause);
+		popup.add(openCurrentLog);
+		popup.add(clearCurrentLog);
+		popup.add(iconAutoSize);
+		popup.addSeparator();
 		popup.add(exit);
 		
 		trayIcon.setImageAutoSize(true);
+		iconAutoSize.setState(true);
+		
 		trayIcon.setToolTip("Keyboard Snooper");
 		trayIcon.setPopupMenu(popup);
 		
-		about.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				trayIcon.displayMessage(TITLE, "by " + AUTHOR, TrayIcon.MessageType.NONE);
+		trayIcon.addActionListener(event -> {
+			try {
+				Desktop.getDesktop().open(folderFile);
+			} catch (Exception ex) {
+				trayIcon.displayMessage(TITLE, "Error opening current log folder..." + AUTHOR, TrayIcon.MessageType.NONE);
+			}
+		});
+		
+		about.addActionListener(event -> {
+			trayIcon.displayMessage(TITLE, "by " + AUTHOR, TrayIcon.MessageType.NONE);
+		});
+		
+		pause.addActionListener(event -> {
+			paused = !paused;
+			if (paused) {
+				trayIcon.displayMessage(TITLE, "Pausing...", TrayIcon.MessageType.NONE);
+				pause.setLabel("Continue");
+			} else {
+				trayIcon.displayMessage(TITLE, "Continuing...", TrayIcon.MessageType.NONE);
+				pause.setLabel("Pause");
+			}
+		});
+		
+		openCurrentLog.addActionListener(event -> {
+			try {
+				Desktop.getDesktop().open(tempFile);
+			} catch (Exception ex) {
+				trayIcon.displayMessage(TITLE, "Error opening current log...", TrayIcon.MessageType.NONE);
+			}
+		});
+		
+		clearCurrentLog.addActionListener(event -> {
+			try {
+				trayIcon.displayMessage(TITLE, "Overwriting temp log...", TrayIcon.MessageType.NONE);
+				bWriter.close();
+				tempFile = Util.createFile(tempFilePath);
+				bWriter = new BufferedWriter(new FileWriter(tempFile));
+				logFile(Util.getHourly());
+			} catch (Exception ex) {
+				trayIcon.displayMessage(TITLE, "Error clearing current log...", TrayIcon.MessageType.NONE);
+			}
+		});
+		
+		iconAutoSize.addItemListener(event -> {
+			int type = event.getStateChange();
+			if (type == ItemEvent.SELECTED) {
+				trayIcon.setImageAutoSize(true);
+			} else {
+				trayIcon.setImageAutoSize(false);
 			}
 		});
 		
@@ -146,9 +221,8 @@ public class Snooper extends NativeKeyAdapter {
 	
     public void nativeKeyReleased(NativeKeyEvent e) {
         try {
-			if (bWriter == null) return;
-			bWriter.write(NativeKeyEvent.getKeyText(e.getKeyCode()));
-			bWriter.newLine();
+			if (bWriter == null || paused) return;
+			logFile(NativeKeyEvent.getKeyText(e.getKeyCode()));
 			wroteSomething = true;
 		} catch(Exception ex) {
 			ex.printStackTrace();

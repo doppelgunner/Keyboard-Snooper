@@ -59,4 +59,8 @@ public class Util {
 		
 		return false;
 	}
+	
+	public static String getHourly() {
+		return "Hourly update as of: " + Util.getCurrentDate(Snooper.perHourFormat);
+	}
 }
