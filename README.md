@@ -4,7 +4,7 @@ A java program for logging / snooping keyboard events
 Below are the link to source code and youtube tutorial separated by Episodes
 * **01** - Demo and sample: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_01), [youtube tutorial](https://youtu.be/QcEAiVRO6xk)
 * **02** - Log to file: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_02), [youtube tutorial](https://youtu.be/Y72M0DnOPew)
-* **03** - Log to file: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_03), [youtube tutorial](https://youtu.be/QUlm5h9sscg)
+* **03** - System tray: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_03), [youtube tutorial](https://youtu.be/QUlm5h9sscg)
 * **04** - More menu items: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_04), [youtube tutorial](https://youtu.be/8qMEgWnZVqg)
 
 
