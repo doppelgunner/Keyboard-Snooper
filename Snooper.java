@@ -130,6 +130,7 @@ public class Snooper extends NativeKeyAdapter {
 		popup = new PopupMenu();
 		MenuItem about = new MenuItem("About");
 		MenuItem pause = new MenuItem("Pause");
+		MenuItem openCurrentFolder = new MenuItem("Open current folder");
 		MenuItem openCurrentLog = new MenuItem("Open current log");
 		MenuItem clearCurrentLog = new MenuItem("Clear current log");
 		CheckboxMenuItem iconAutoSize = new CheckboxMenuItem("Icon image auto size");
@@ -138,6 +139,7 @@ public class Snooper extends NativeKeyAdapter {
 		popup.add(about);
 		popup.addSeparator();
 		popup.add(pause);
+		popup.add(openCurrentFolder);
 		popup.add(openCurrentLog);
 		popup.add(clearCurrentLog);
 		popup.add(iconAutoSize);
@@ -151,11 +153,7 @@ public class Snooper extends NativeKeyAdapter {
 		trayIcon.setPopupMenu(popup);
 		
 		trayIcon.addActionListener(event -> {
-			try {
-				Desktop.getDesktop().open(folderFile);
-			} catch (Exception ex) {
-				trayIcon.displayMessage(TITLE, "Error opening current log folder..." + AUTHOR, TrayIcon.MessageType.NONE);
-			}
+			KSApplication.show();
 		});
 		
 		about.addActionListener(event -> {
@@ -170,6 +168,14 @@ public class Snooper extends NativeKeyAdapter {
 			} else {
 				trayIcon.displayMessage(TITLE, "Continuing...", TrayIcon.MessageType.NONE);
 				pause.setLabel("Pause");
+			}
+		});
+		
+		openCurrentFolder.addActionListener(event -> {
+			try {
+				Desktop.getDesktop().open(folderFile);
+			} catch (Exception ex) {
+				trayIcon.displayMessage(TITLE, "Error opening current log folder..." + AUTHOR, TrayIcon.MessageType.NONE);
 			}
 		});
 		
@@ -244,6 +250,8 @@ public class Snooper extends NativeKeyAdapter {
         }
 
         GlobalScreen.addNativeKeyListener(new Snooper());
+		
+		KSApplication.main(args);
     }
 	
 	//called when the program is aout to exit or shutdown
