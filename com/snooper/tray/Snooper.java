@@ -1,3 +1,8 @@
+package com.snooper.tray;
+
+import com.snooper.*;
+import com.snooper.app.*;
+
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -8,9 +13,6 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//COMPILE: javac -cp ".;lib/jnativehook-2.1.0.jar;" Snooper.java
-//RUN: java -cp ".;lib/jnativehook-2.1.0.jar;" Snooper
-//RUN without console: javaw -cp ".;lib/jnativehook-2.1.0.jar;" Snooper
 public class Snooper extends NativeKeyAdapter {
   
 	public static final String FOLDER = "snoop_log";
@@ -120,7 +122,7 @@ public class Snooper extends NativeKeyAdapter {
 			System.err.println("System tray is not supported");
 		}
 		tray = SystemTray.getSystemTray();
-		trayIcon = new TrayIcon(Util.createImage("images/snooper.png","Keyboard Snooper"));
+		trayIcon = new TrayIcon(Util.createImage("/images/snooper.png","Keyboard Snooper"));
 		try {
 			tray.add(trayIcon);
 		} catch (Exception ex) {

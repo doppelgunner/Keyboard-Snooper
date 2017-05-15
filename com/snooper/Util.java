@@ -1,3 +1,7 @@
+package com.snooper;
+
+import com.snooper.tray.*;
+
 import java.util.*;
 import java.io.*;
 import java.text.*;

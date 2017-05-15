@@ -1,3 +1,5 @@
+package com.snooper.app;
+
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
@@ -22,13 +24,13 @@ public class KSApplication extends Application {
 		
 		//load fxmls
 		
-		Parent rootMain = FXMLLoader.load(getClass().getResource("fxml/Main.fxml"));
+		Parent rootMain = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
 		
 		//make scenes
 		mainScene = new Scene(rootMain, WIDTH, HEIGHT);
 		
 		//stage configs
-		primaryStage.getIcons().add(new Image("images/snooper.png"));
+		primaryStage.getIcons().add(new Image("/images/snooper.png"));
 		primaryStage.setResizable(false);
 		
 		//assigne default scene
