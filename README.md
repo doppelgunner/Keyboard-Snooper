@@ -10,7 +10,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **05** - JavaFX window: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_05), [youtube tutorial](https://youtu.be/AXeCsdYh2dY)
 
 ### Running
-  * COMPILE: javac -cp ".;lib/jnativehook-2.1.0.jar;" com/snooper/tray/Snooper.java
+  * COMPILE: javac -cp ".;lib/jnativehook-2.1.0.jar;" com/snooper/tray/Snooper.java com/snooper/app/controller/*.java
   * RUN: java -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
   * RUN without console: javaw -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
 

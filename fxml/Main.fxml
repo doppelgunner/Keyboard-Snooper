@@ -6,8 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="com.snooper.app.controller.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,4 +24,15 @@
    <bottom>
       <fx:include source="Footer.fxml" />
    </bottom>
+   <center>
+      <FlowPane alignment="CENTER" hgap="30.0" prefHeight="200.0" prefWidth="200.0" vgap="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goPref" prefHeight="100.0" prefWidth="100.0" text="Preferences" />
+            <Button mnemonicParsing="false" onAction="#goAbout" prefHeight="80.0" prefWidth="80.0" text="About" />
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </FlowPane>
+   </center>
 </BorderPane>
