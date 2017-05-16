@@ -67,4 +67,12 @@ public class Util {
 	public static String getHourly() {
 		return "Hourly update as of: " + Util.getCurrentDate(Snooper.perHourFormat);
 	}
+	
+	public static void goLink(String link) {
+		try {
+			Desktop.getDesktop().browse(new URI(link));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 }
