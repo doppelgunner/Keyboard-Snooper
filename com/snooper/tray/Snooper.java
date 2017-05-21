@@ -25,6 +25,11 @@ public class Snooper extends NativeKeyAdapter {
 	public static final String perHourFormat = "yyyy, MM dd, h:mma";
 	public static final String TITLE = "Keyboard Snooper";
 	public static final String AUTHOR = "doppelgunner";
+	
+	public static final String PREF_FOLDER = "data";
+	public static final String PREF_NAME = "pref";
+	public static final String PREF_EXTENSION_NAME = ".json";
+	public static final String PREF_FILEPATH = PREF_FOLDER + DASH + PREF_NAME + PREF_EXTENSION_NAME;
 
 	private File folderFile;
 	private File keyStrokesFile;
@@ -238,6 +243,11 @@ public class Snooper extends NativeKeyAdapter {
     }
 
     public static void main(String[] args) {
+		if (args.length > 0 && args[0].equals("test")) {
+			test();
+			return;
+		}
+		
 		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
 		logger.setUseParentHandlers(false);
@@ -255,6 +265,13 @@ public class Snooper extends NativeKeyAdapter {
 		
 		KSApplication.main(args);
     }
+	
+	//method for testing args = test
+	public static void test() {
+		//test here
+		Pref pref = Util.loadPref();
+		System.out.println(pref);
+	}
 	
 	//called when the program is aout to exit or shutdown
 	public void dispose() {

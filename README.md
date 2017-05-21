@@ -13,9 +13,10 @@ Below are the link to source code and youtube tutorial separated by Episodes
 
 
 ### How to compile and run
-  * COMPILE: javac -cp ".;lib/jnativehook-2.1.0.jar;" com/snooper/tray/Snooper.java com/snooper/app/controller/*.java
-  * RUN: java -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
+  * COMPILE: javac -cp ".;lib/*" com/snooper/tray/Snooper.java com/snooper/app/controller/*.java
+  * RUN: java -cp ".;lib/*" com.snooper.tray.Snooper
   * RUN without console: javaw -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
+  * RUN TEST ONLY: java -cp ".;lib/*" com.snooper.tray.Snooper test
 
 ### My Accounts 
   * [blogspot](http://doppelgunner.blogspot.com/)

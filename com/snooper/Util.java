@@ -9,16 +9,15 @@ import javax.swing.*;
 import java.net.*;
 import java.awt.*;
 
+import com.google.gson.Gson;
+
 public class Util {
 	
 	//create a file in the disk
 	public static File createFile(String filename) {
 		File file = new File(filename);
-		File parentFile = file.getParentFile();
+		checkParentFile(file);
 		try {
-			if (parentFile != null) {
-				parentFile.mkdirs();
-			}
 			if (file.createNewFile()) {
 				System.out.println("File created: " + filename);
 			} else {
@@ -29,6 +28,17 @@ public class Util {
 		}
 		
 		return file;
+	}
+	
+	public static void checkParentFile(File file) {
+		File parentFile = file.getParentFile();
+		try {
+			if (parentFile != null) {
+				parentFile.mkdirs();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	//get the current date within the given format
@@ -74,5 +84,45 @@ public class Util {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public static boolean serialize_json(Serializable serializable, String filepath) {
+		Gson gson = new Gson();
+		File file = new File(filepath + (filepath.contains(".json") ? "" : ".json"));
+		checkParentFile(file);
+		
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+			gson.toJson(serializable, writer);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static <T>T deserialize_json(Class<T> c, String filepath) {
+		Gson gson = new Gson();
+		try (BufferedReader reader = new BufferedReader(new FileReader(filepath + (filepath.contains(".json") ? "" : ".json")))) {
+			return gson.fromJson(reader,c);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public static Pref loadPref() {
+		Pref pref = deserialize_json(Pref.class, Snooper.PREF_FILEPATH);
+		if (pref == null) {
+			pref = createPref();
+		}
+		return pref;
+	}
+	
+	public static Pref createPref() {
+		Pref pref = new Pref();
+		serialize_json(pref,Snooper.PREF_FILEPATH);
+		return pref;
 	}
 }
