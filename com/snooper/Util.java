@@ -120,9 +120,22 @@ public class Util {
 		return pref;
 	}
 	
+	public static boolean savePref(Pref pref) {
+		if (pref == null) return false;
+		
+		serialize_json(pref,Snooper.PREF_FILEPATH);
+		return true;
+	}
+	
 	public static Pref createPref() {
 		Pref pref = new Pref();
 		serialize_json(pref,Snooper.PREF_FILEPATH);
 		return pref;
+	}
+	
+	public static void notif(String title, String message) {
+		Snooper snooper = Snooper.getInstance();
+		Pref pref = snooper.getPref();
+		pref.notif(snooper.getTrayIcon(), title, message);
 	}
 }

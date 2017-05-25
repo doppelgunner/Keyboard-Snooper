@@ -52,7 +52,26 @@ public class Snooper extends NativeKeyAdapter {
 	
 	private boolean paused = false;
 	
+	private Pref pref;
+	private static Snooper currentInstance;
+	
+	public static Snooper getInstance() {
+		return currentInstance;
+	}
+	
+	public Pref getPref() {
+		return pref;
+	}
+	
+	public TrayIcon getTrayIcon() {
+		return trayIcon;
+	}
+	
 	public Snooper() {
+		currentInstance = this;
+		pref = Util.loadPref();
+		pref.init();
+		
 		init();
 		initSystemTray();
 		start();
@@ -140,7 +159,6 @@ public class Snooper extends NativeKeyAdapter {
 		MenuItem openCurrentFolder = new MenuItem("Open current folder");
 		MenuItem openCurrentLog = new MenuItem("Open current log");
 		MenuItem clearCurrentLog = new MenuItem("Clear current log");
-		CheckboxMenuItem iconAutoSize = new CheckboxMenuItem("Icon image auto size");
 		MenuItem exit = new MenuItem("Exit");
 		
 		popup.add(about);
@@ -149,12 +167,14 @@ public class Snooper extends NativeKeyAdapter {
 		popup.add(openCurrentFolder);
 		popup.add(openCurrentLog);
 		popup.add(clearCurrentLog);
-		popup.add(iconAutoSize);
 		popup.addSeparator();
 		popup.add(exit);
 		
-		trayIcon.setImageAutoSize(true);
-		iconAutoSize.setState(true);
+		trayIcon.setImageAutoSize(pref.isIconImageAutoSize());
+		
+		pref.iconImageAutoSizeProperty().addListener((o,ov,nv) -> {
+			trayIcon.setImageAutoSize(nv);
+		});
 		
 		trayIcon.setToolTip("Keyboard Snooper");
 		trayIcon.setPopupMenu(popup);
@@ -164,16 +184,16 @@ public class Snooper extends NativeKeyAdapter {
 		});
 		
 		about.addActionListener(event -> {
-			trayIcon.displayMessage(TITLE, "by " + AUTHOR, TrayIcon.MessageType.NONE);
+			Util.notif(TITLE, "by " + AUTHOR);
 		});
 		
 		pause.addActionListener(event -> {
 			paused = !paused;
 			if (paused) {
-				trayIcon.displayMessage(TITLE, "Pausing...", TrayIcon.MessageType.NONE);
+				Util.notif(TITLE, "Pausing...");
 				pause.setLabel("Continue");
 			} else {
-				trayIcon.displayMessage(TITLE, "Continuing...", TrayIcon.MessageType.NONE);
+				Util.notif(TITLE, "Continuing...");
 				pause.setLabel("Pause");
 			}
 		});
@@ -182,7 +202,7 @@ public class Snooper extends NativeKeyAdapter {
 			try {
 				Desktop.getDesktop().open(folderFile);
 			} catch (Exception ex) {
-				trayIcon.displayMessage(TITLE, "Error opening current log folder..." + AUTHOR, TrayIcon.MessageType.NONE);
+				Util.notif(TITLE, "Error opening current log folder..." + AUTHOR);
 			}
 		});
 		
@@ -190,33 +210,24 @@ public class Snooper extends NativeKeyAdapter {
 			try {
 				Desktop.getDesktop().open(tempFile);
 			} catch (Exception ex) {
-				trayIcon.displayMessage(TITLE, "Error opening current log...", TrayIcon.MessageType.NONE);
+				Util.notif(TITLE, "Error opening current log...");
 			}
 		});
 		
 		clearCurrentLog.addActionListener(event -> {
 			try {
-				trayIcon.displayMessage(TITLE, "Overwriting temp log...", TrayIcon.MessageType.NONE);
+				Util.notif(TITLE, "Overwriting temp log...");
 				bWriter.close();
 				tempFile = Util.createFile(tempFilePath);
 				bWriter = new BufferedWriter(new FileWriter(tempFile));
 				logFile(Util.getHourly());
 			} catch (Exception ex) {
-				trayIcon.displayMessage(TITLE, "Error clearing current log...", TrayIcon.MessageType.NONE);
-			}
-		});
-		
-		iconAutoSize.addItemListener(event -> {
-			int type = event.getStateChange();
-			if (type == ItemEvent.SELECTED) {
-				trayIcon.setImageAutoSize(true);
-			} else {
-				trayIcon.setImageAutoSize(false);
+				Util.notif(TITLE, "Error clearing current log...");
 			}
 		});
 		
 		exit.addActionListener(e -> {
-			trayIcon.displayMessage(TITLE, "Exiting ...", TrayIcon.MessageType.NONE);
+			Util.notif(TITLE, "Exiting ...");
 			tray.remove(trayIcon);
 			System.exit(0);
 		});
@@ -229,7 +240,7 @@ public class Snooper extends NativeKeyAdapter {
 		perHourTimer.setInitialDelay(0);
 		perHourTimer.start();
 		
-		trayIcon.displayMessage(TITLE, "Starting ...", TrayIcon.MessageType.NONE);
+		Util.notif(TITLE, "Starting ...");
 	}
 	
     public void nativeKeyReleased(NativeKeyEvent e) {
