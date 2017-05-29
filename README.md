@@ -11,7 +11,8 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **06** - Using packages: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_06), [youtube tutorial](https://youtu.be/Pf_l3bMCEo4)
 * **07** - JavaFX switch scenes: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_07), [youtube tutorial](https://youtu.be/Nkv9X12WpkQ)
 * **08** - JavaFX hyperlinks: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_08), [youtube tutorial](https://youtu.be/vqZ7B2rgssc)
-* **09** - Serialize to JSON: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_09), [youtube tutorial - add later]()
+* **09** - Serialize to JSON: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_09), [youtube tutorial](https://youtu.be/shsNVGtvWWY)
+* **10** - JavaFX GUI Bindings: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_10), [youtube tutorial](https://youtu.be/kKpPnneWIYk)
 
 
 ### How to compile and run
