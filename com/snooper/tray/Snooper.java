@@ -13,7 +13,7 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Snooper extends NativeKeyAdapter {
+public class Snooper extends NativeKeyAdapter implements Disposable {
   
 	public static final String FOLDER = "snoop_log";
 	public static final String DASH = "/";
@@ -39,12 +39,7 @@ public class Snooper extends NativeKeyAdapter {
 	
 	private String startDate;
 	
-	private javax.swing.Timer flushTimer;
-	private javax.swing.Timer perHourTimer;
-	
-	private BufferedWriter bWriter;
-	
-	private boolean wroteSomething;
+	private SnoopLogger sLogger;
 	
 	private TrayIcon trayIcon;
 	private SystemTray tray;
@@ -84,60 +79,17 @@ public class Snooper extends NativeKeyAdapter {
 		keyStrokesFilePath = FOLDER + DASH + START_NAME + startDate + EXTENSION_NAME;
 		keyStrokesFile = new File(keyStrokesFilePath);
 		tempFilePath = FOLDER + DASH + START_NAME + "temp" + EXTENSION_NAME;
+		tempFile = new File(tempFilePath);
 		
 		if (Util.hasInstance(tempFilePath)) {
 			System.exit(0); //exit app if already has a temp file to log into
 		}
 		
-		tempFile = Util.createFile(tempFilePath);
-		
-		try {
-			bWriter = new BufferedWriter(new FileWriter(tempFile));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		sLogger = new SnoopLogger(tempFilePath);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(()-> {
 			dispose();
 		}));
-		
-		flushTimer = new javax.swing.Timer(SECOND_IN_MILLI, e-> {
-			try {
-				if (wroteSomething) {
-					wroteSomething = false;
-					bWriter.flush();
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		});
-		
-		perHourTimer = new javax.swing.Timer(HOUR_IN_MILLI, e-> {
-			try {
-				logFile(Util.getHourly());
-				flushData();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		});
-	}
-	
-	public void logFile(String s) {
-		try {
-			bWriter.write(s);
-			bWriter.newLine();
-			bWriter.flush(); 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	public void flushData() {
-		try {
-			bWriter.flush(); 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} 
 	}
 	
 	//init of system tray
@@ -208,22 +160,14 @@ public class Snooper extends NativeKeyAdapter {
 		
 		openCurrentLog.addActionListener(event -> {
 			try {
-				Desktop.getDesktop().open(tempFile);
+				Desktop.getDesktop().open(sLogger.getLogFile());
 			} catch (Exception ex) {
 				Util.notif(TITLE, "Error opening current log...");
 			}
 		});
 		
 		clearCurrentLog.addActionListener(event -> {
-			try {
-				Util.notif(TITLE, "Overwriting temp log...");
-				bWriter.close();
-				tempFile = Util.createFile(tempFilePath);
-				bWriter = new BufferedWriter(new FileWriter(tempFile));
-				logFile(Util.getHourly());
-			} catch (Exception ex) {
-				Util.notif(TITLE, "Error clearing current log...");
-			}
+			sLogger.clear();
 		});
 		
 		exit.addActionListener(e -> {
@@ -233,21 +177,14 @@ public class Snooper extends NativeKeyAdapter {
 		});
 	}
 	
-	//starts the timer of the program
 	public void start() {
-		//start the timers
-		flushTimer.start();
-		perHourTimer.setInitialDelay(0);
-		perHourTimer.start();
-		
 		Util.notif(TITLE, "Starting ...");
 	}
 	
     public void nativeKeyReleased(NativeKeyEvent e) {
         try {
-			if (bWriter == null || paused) return;
-			logFile(NativeKeyEvent.getKeyText(e.getKeyCode()));
-			wroteSomething = true;
+			if (sLogger.getWriter() == null || paused) return;
+			sLogger.snoopLog(NativeKeyEvent.getKeyText(e.getKeyCode()));
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -280,19 +217,24 @@ public class Snooper extends NativeKeyAdapter {
 	//method for testing args = test
 	public static void test() {
 		//test here
+		
+		/* //test serialization
 		Pref pref = Util.loadPref();
 		System.out.println(pref);
+		*/
+		
+		//test SnoopLogger (encapsulation of logging)
+		SnoopLogger sLogger = new SnoopLogger("test/test_temp.test");
+		sLogger.snoopLog("abcdef");
+		sLogger.snoopLog("12345");
+		sLogger.dispose();
+		sLogger.renameFile("test/test_final.test");
 	}
 	
 	//called when the program is aout to exit or shutdown
+	@Override
 	public void dispose() {
-		try {
-			if (bWriter != null) {
-				bWriter.close();
-			}
-			tempFile.renameTo(keyStrokesFile);
-		} catch (Exception ex) {
-			System.err.println("Error: closing stream");
-		}
+		sLogger.dispose();
+		sLogger.renameFile(keyStrokesFile);
 	}
 }
