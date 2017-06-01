@@ -224,11 +224,20 @@ public class Snooper extends NativeKeyAdapter implements Disposable {
 		*/
 		
 		//test SnoopLogger (encapsulation of logging)
+		/*
 		SnoopLogger sLogger = new SnoopLogger("test/test_temp.test");
 		sLogger.snoopLog("abcdef");
 		sLogger.snoopLog("12345");
 		sLogger.dispose();
 		sLogger.renameFile("test/test_final.test");
+		*/
+		
+		//test SnoopReader Episode 12
+		SnoopReader sReader = new SnoopReader(FOLDER + DASH + "log_201706011232550817.slog");
+		sReader.printSnoopKeys();
+		System.out.println("has same key, index [5 and 6]: " + sReader.hasSameKey(5,6));
+		System.out.println("has same key, index [3 and 6]: " + sReader.hasSameKey(3,6));
+		System.out.println("has same keys, indexes [0, 10 and 57]: " + sReader.hasSameKeys(0,10,57));
 	}
 	
 	//called when the program is aout to exit or shutdown
