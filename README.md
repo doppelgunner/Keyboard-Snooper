@@ -1,6 +1,8 @@
 # Keyboard-Snooper
 A java program for logging / snooping keyboard events
 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.me/doppelgunner)
+
 ### Link to youtube playlist: [Keyboard Snooper tutorial playlist](https://www.youtube.com/watch?v=QcEAiVRO6xk&list=PLlRMSK1suXjNzJYi2LFrcizgV9mSUto6x)
 Below are the link to source code and youtube tutorial separated by Episodes
 * **01** - Demo and sample: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_01), [youtube tutorial](https://youtu.be/QcEAiVRO6xk)
