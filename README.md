@@ -16,6 +16,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **09** - Serialize to JSON: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_09), [youtube tutorial](https://youtu.be/shsNVGtvWWY)
 * **10** - JavaFX GUI Bindings: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_10), [youtube tutorial](https://youtu.be/kKpPnneWIYk)
 * **11** - Encapsulation: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_11), [youtube tutorial](https://youtu.be/ncZF_D8m0l8)
+* **12** - SnoopLog Reader: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_12), [youtube tutorial](https://youtu.be/Vead9l0PDrM)
 
 
 ### How to compile and run
