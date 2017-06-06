@@ -17,11 +17,12 @@ public class KSApplication extends Application {
 	public static final int WIDTH = 640, HEIGHT = 400;
 	
 	private static Stage primaryStage;
-	private static Scene mainScene, prefScene, aboutScene;
+	private static Scene mainScene, prefScene, aboutScene, snoopLogsScene;
 	
 	private static MainController mainController;
 	private static PrefController prefController;
 	private static AboutController aboutController;
+	private static SnoopLogsController snoopLogsController;
 	
 	private static Snooper snooper;
 	
@@ -35,6 +36,10 @@ public class KSApplication extends Application {
 	
 	public static AboutController getAboutController() {
 		return aboutController;
+	}
+	
+	public static SnoopLogsController getSnoopLogsController() {
+		return snoopLogsController;
 	}
 	
 	public static void main(String[] args) {
@@ -63,10 +68,15 @@ public class KSApplication extends Application {
 		Parent rootAbout = loader.load();
 		aboutController = loader.getController();
 		
+		loader = createLoader(getClass().getResource("/fxml/SnoopLogs.fxml"));
+		Parent rootSnoopLogs = loader.load();
+		snoopLogsController = loader.getController();
+		
 		//make scenes
 		mainScene = new Scene(rootMain, WIDTH, HEIGHT);
 		prefScene = new Scene(rootPref, WIDTH, HEIGHT);
 		aboutScene = new Scene(rootAbout, WIDTH, HEIGHT);
+		snoopLogsScene = new Scene(rootSnoopLogs, WIDTH, HEIGHT);
 		
 		//stage configs
 		primaryStage.getIcons().add(new Image("/images/snooper.png"));
@@ -117,5 +127,9 @@ public class KSApplication extends Application {
 	
 	public static void switchAbout() {
 		setScene(aboutScene);
+	}
+	
+	public static void switchSnoopLogs() {
+		setScene(snoopLogsScene);
 	}
 }

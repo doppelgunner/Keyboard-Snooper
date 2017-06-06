@@ -20,4 +20,9 @@ public class MainController {
 	private void goAbout() {
 		KSApplication.switchAbout();
 	}
+	
+	@FXML
+	private void goSnoopLogs() {
+		KSApplication.switchSnoopLogs();
+	}
 }

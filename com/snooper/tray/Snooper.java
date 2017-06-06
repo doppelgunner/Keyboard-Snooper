@@ -22,7 +22,7 @@ public class Snooper extends NativeKeyAdapter implements Disposable {
 	public static final int SECOND_IN_MILLI = 1_000;
 	public static final int HOUR_IN_MILLI = SECOND_IN_MILLI * 60 * 60;
 	public static final String fileNameFormat = "yyyyMMddHHmmssSSSS";
-	public static final String perHourFormat = "yyyy, MM dd, h:mma";
+	public static final String perHourFormat = "yyyy, MM/dd, h:mma";
 	public static final String TITLE = "Keyboard Snooper";
 	public static final String AUTHOR = "doppelgunner";
 	

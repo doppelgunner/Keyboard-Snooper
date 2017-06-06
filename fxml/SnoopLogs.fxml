@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.SnoopLogsController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include source="HomeBack.fxml" />
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+               <children>
+                  <Label text="SnoopLogs">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <fx:include source="Footer.fxml" />
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.3377926421404682" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <VBox prefHeight="284.0" prefWidth="204.0">
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="175.0">
+                     <children>
+                        <ListView fx:id="sLogListView" layoutX="-39.0" layoutY="14.0" prefHeight="250.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="175.0" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#refreshSLogs" text="refresh">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="sLogLeftButton" mnemonicParsing="false" onAction="#sLogLeft" text="&lt;" />
+                        <TextField fx:id="sLogPageTextField" prefHeight="25.0" prefWidth="45.0" />
+                        <Label fx:id="sLogMaxPageLabel" text="/1" />
+                        <Button fx:id="sLogRightButton" mnemonicParsing="false" onAction="#sLogRight" text="&gt;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="417.0" />
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="393.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="186.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Button mnemonicParsing="false" text="&lt;" />
+                        <TextField prefHeight="25.0" prefWidth="50.0" />
+                        <Label text="/1" />
+                        <Button mnemonicParsing="false" text="&gt;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

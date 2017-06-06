@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:controller="com.snooper.app.controller.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.MainController">
    <top>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,8 +27,9 @@
    <center>
       <FlowPane alignment="CENTER" hgap="30.0" prefHeight="200.0" prefWidth="200.0" vgap="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#goPref" prefHeight="100.0" prefWidth="100.0" text="Preferences" />
-            <Button mnemonicParsing="false" onAction="#goAbout" prefHeight="80.0" prefWidth="80.0" text="About" />
+            <Button mnemonicParsing="false" onAction="#goSnoopLogs" prefHeight="100.0" prefWidth="100.0" text="Snoop Logs" />
+            <Button mnemonicParsing="false" onAction="#goPref" prefHeight="89.0" prefWidth="89.0" text="Preferences" />
+            <Button mnemonicParsing="false" onAction="#goAbout" prefHeight="66.0" prefWidth="66.0" text="About" />
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

@@ -138,4 +138,52 @@ public class Util {
 		Pref pref = snooper.getPref();
 		pref.notif(snooper.getTrayIcon(), title, message);
 	}
+	
+	public static File[] getSLogFiles(File parentDir) {
+		return parentDir.listFiles((dir,name) -> {
+			return name.toLowerCase().endsWith(Snooper.EXTENSION_NAME);
+		});
+	}
+	
+	public static File[] getSLogFiles(String parentDir) {
+		return getSLogFiles(new File(parentDir));
+	}
+	
+	//optional to reverse array
+	public static <T> void reverse(T[] array) {
+		Collections.reverse(Arrays.asList(array));
+	}
+	
+	public static boolean tryParseInt(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean withinRange(int bound1, int bound2, int test) {
+		if (test >= bound1 && test <= bound2) return true;
+		if (test <= bound1 && test >= bound2) return true;
+		return false;
+	}
+	
+	public static Date toDate(String dateString, String format) {
+		Date date = null;
+		try {
+			DateFormat dateFormat = new SimpleDateFormat(format);
+			date = dateFormat.parse(dateString);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return date;
+	}
+	
+	public static String toString(Date date, String format) {
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		return dateFormat.format(date);
+	}
 }
