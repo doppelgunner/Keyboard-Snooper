@@ -13,32 +13,39 @@ public class SnoopReader {
 	private String separator;
 	
 	public SnoopReader(String logFilepath) {
-		this.separator = "::";
-		sKeys = new ArrayList<SnoopKey>();
-		load(logFilepath);
+		this(new File(logFilepath));
 	}
 	
-	private void load(String logFilepath) {
-		this.logFile = new File(logFilepath);
+	public SnoopReader(SLogFile sLogFile) {
+		this(sLogFile.getFile());
+	}
+	
+	public SnoopReader(File file) {
+		this.separator = "::";
+		sKeys = new ArrayList<SnoopKey>();
+		load(file);
+	}
+	
+	private void load(File logFile) {
+		this.logFile = logFile;
 		
 		try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
-			String line = reader.readLine();
+			String line;
 			int counter = 0;
-			while(line != null) {
+			while((line = reader.readLine()) != null) {
 				String[] s = line.split(separator);
 				sKeys.add(new SnoopKey(counter, s[0], s[1]));
 				
 				counter++;
-				line = reader.readLine();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			Util.notif(Snooper.TITLE, "Problem loading file (SnoopReader): " + logFilepath);
+			Util.notif(Snooper.TITLE, "Problem loading file (SnoopReader): " + logFile.getPath());
 		}
 	}
 	
 	public boolean withinRange(int index) {
-		if (index >= 0 && index < sKeys.size()) return true;
+		if (index >= 0 && index < getSnoopKeysSize()) return true;
 		return false;
 	}
 	
@@ -70,5 +77,9 @@ public class SnoopReader {
 		}
 		
 		return true;
+	}
+	
+	public int getSnoopKeysSize() {
+		return sKeys.size();
 	}
 }

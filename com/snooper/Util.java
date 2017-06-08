@@ -43,21 +43,7 @@ public class Util {
 	
 	//get the current date within the given format
 	public static String getCurrentDate(String format) {
-		DateFormat dateFormat = new SimpleDateFormat(format);
-		Date date = new Date();
-		return dateFormat.format(date);
-	}
-	
-	//gets the image from the path
-	public static Image createImage(String path, String description) {
-		URL imageURL = Util.class.getResource(path);
-		
-		if (imageURL == null) {
-			System.err.println("Resource not found: " + path);
-			return null;
-		} else {
-			return (new ImageIcon(imageURL, description)).getImage();
-		}
+		return toString(new Date(), format);
 	}
 	
 	//converts the string to file and pass it to hasInstance(File file) method
@@ -185,5 +171,13 @@ public class Util {
 	public static String toString(Date date, String format) {
 		DateFormat dateFormat = new SimpleDateFormat(format);
 		return dateFormat.format(date);
+	}
+	
+	public static Image createAwtImage(String path, String description) {
+		return (new ImageIcon(path,description)).getImage();
+	}
+	
+	public static javafx.scene.image.Image createJavaFXImage(String path) {
+		return new javafx.scene.image.Image("file:" + path);
 	}
 }

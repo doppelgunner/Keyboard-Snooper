@@ -98,7 +98,7 @@ public class Snooper extends NativeKeyAdapter implements Disposable {
 			System.err.println("System tray is not supported");
 		}
 		tray = SystemTray.getSystemTray();
-		trayIcon = new TrayIcon(Util.createImage("/images/snooper.png","Keyboard Snooper"));
+		trayIcon = new TrayIcon(Util.createAwtImage("images/snooper.png","Keyboard Snooper"));
 		try {
 			tray.add(trayIcon);
 		} catch (Exception ex) {

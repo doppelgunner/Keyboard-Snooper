@@ -53,10 +53,13 @@
             </VBox>
             <VBox>
                <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="417.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="417.0">
+                     <children>
+                        <ListView fx:id="keyLogsListView" layoutX="80.0" layoutY="41.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="393.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="40.0" prefWidth="186.0">
+                        <Label fx:id="sLogFileSelectedLabel" prefHeight="40.0" prefWidth="186.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -64,10 +67,10 @@
                               <Insets right="10.0" />
                            </padding>
                         </Label>
-                        <Button mnemonicParsing="false" text="&lt;" />
-                        <TextField prefHeight="25.0" prefWidth="50.0" />
-                        <Label text="/1" />
-                        <Button mnemonicParsing="false" text="&gt;" />
+                        <Button fx:id="keyLogLeftButton" mnemonicParsing="false" onAction="#keyLogLeft" text="&lt;" />
+                        <TextField fx:id="keyLogPageTextField" prefHeight="25.0" prefWidth="50.0" />
+                        <Label fx:id="keyLogMaxPageLabel" text="/1" />
+                        <Button fx:id="keyLogRightButton" mnemonicParsing="false" onAction="#keyLogRight" text="&gt;" />
                      </children>
                   </HBox>
                </children>

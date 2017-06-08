@@ -79,7 +79,7 @@ public class KSApplication extends Application {
 		snoopLogsScene = new Scene(rootSnoopLogs, WIDTH, HEIGHT);
 		
 		//stage configs
-		primaryStage.getIcons().add(new Image("/images/snooper.png"));
+		primaryStage.getIcons().add(Util.createJavaFXImage("images/snooper.png"));
 		primaryStage.setResizable(false);
 		
 		//assigne default scene
