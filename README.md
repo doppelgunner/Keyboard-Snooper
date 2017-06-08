@@ -1,9 +1,11 @@
 # Keyboard-Snooper
 A java program for logging / snooping keyboard events
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.me/doppelgunner)
+## Donations
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.me/doppelgunner)  
+[![patreon](https://c5.patreon.com/external/logo/logomarkOrange.svg)](https://www.patreon.com/doppelgunner)
 
-### Link to youtube playlist: [Keyboard Snooper tutorial playlist](https://www.youtube.com/watch?v=QcEAiVRO6xk&list=PLlRMSK1suXjNzJYi2LFrcizgV9mSUto6x)
+## Link to youtube playlist: [Keyboard Snooper tutorial playlist](https://www.youtube.com/watch?v=QcEAiVRO6xk&list=PLlRMSK1suXjNzJYi2LFrcizgV9mSUto6x)
 Below are the link to source code and youtube tutorial separated by Episodes
 * **01** - Demo and sample: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_01), [youtube tutorial](https://youtu.be/QcEAiVRO6xk)
 * **02** - Log to file: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_02), [youtube tutorial](https://youtu.be/Y72M0DnOPew)
@@ -17,16 +19,18 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **10** - JavaFX GUI Bindings: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_10), [youtube tutorial](https://youtu.be/kKpPnneWIYk)
 * **11** - Encapsulation: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_11), [youtube tutorial](https://youtu.be/ncZF_D8m0l8)
 * **12** - SnoopLog Reader: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_12), [youtube tutorial](https://youtu.be/Vead9l0PDrM)
+* **13** - JavaFX Pagination: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_13), [youtube tutorial](https://youtu.be/DGG8O-KHN6I)
 
 
-### How to compile and run
+## How to compile and run
   * COMPILE: javac -cp ".;lib/*" com/snooper/*.java com/snooper/tray/*.java com/snooper/app/*.java com/snooper/app/controller/*.java 
   * RUN: java -cp ".;lib/*" com.snooper.tray.Snooper
   * RUN without console: javaw -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
   * RUN TEST ONLY: java -cp ".;lib/*" com.snooper.tray.Snooper test
 
-### My Accounts 
+## My Accounts 
   * [blogspot](http://doppelgunner.blogspot.com/)
+  * [patreon](https://www.patreon.com/doppelgunner)
   * [instagram](https://www.instagram.com/doppelgunner/)
   * [twitter](https://twitter.com/doppelgunner)
   * [google+](https://plus.google.com/u/0/111975005561843752356/posts)
