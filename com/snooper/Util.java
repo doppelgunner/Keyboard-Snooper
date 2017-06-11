@@ -173,6 +173,12 @@ public class Util {
 		return dateFormat.format(date);
 	}
 	
+	//date in string to another format in string
+	public static String toString(String dateString, String formatParse, String formatTo) {
+		Date date = toDate(dateString,formatParse);
+		return toString(date,formatTo);
+	}
+	
 	public static Image createAwtImage(String path, String description) {
 		return (new ImageIcon(path,description)).getImage();
 	}

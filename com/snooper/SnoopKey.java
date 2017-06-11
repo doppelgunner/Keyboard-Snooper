@@ -1,5 +1,7 @@
 package com.snooper;
 
+import com.snooper.tray.*;
+
 public class SnoopKey {
 	
 	private int index;
@@ -25,7 +27,7 @@ public class SnoopKey {
 	}
 	
 	public String toString() {
-		return "[" + index + "] - " + date + "::" + key;
+		return "[" + index + "] - " + Util.toString(date,Snooper.fileNameFormat,Snooper.perHourFormat) + " :: " + key.toUpperCase();
 	}
 	
 	public boolean hasSameKey(SnoopKey sKey) {

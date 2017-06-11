@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.collections.*;
 import java.io.*;
 import java.util.*;
+import javafx.scene.input.*;
 
 public class SnoopLogsController {
 	
@@ -25,7 +26,8 @@ public class SnoopLogsController {
 	@FXML Label sLogFileSelectedLabel;
 	@FXML TextField keyLogPageTextField;
 	
-	public static final int MAX_CONTENT_PER_PAGE = 10;
+	public static final int MAX_KEYLOG_CONTENT_PER_PAGE = 10;
+	public static final int MAX_SLOG_CONTENT_PER_PAGE = 6;
 	
 	private ObservableList<SLogFile> sLogFilesContents;
 	private SLogFile[] sLogFiles;
@@ -52,15 +54,45 @@ public class SnoopLogsController {
 		selectedSLogIndex = 0;
 		sameSLogIndex = false;
 		
-		sLogListView.getSelectionModel().selectedItemProperty().addListener((o,ov,nv) -> {
-			if (nv == null) return;
-			int index = getSelectedSLogIndex();
-			if (index == -1) return;
-			System.out.println("slog selected[" + index + "]:" + nv);
-			sameSLogIndex = false;
-			selectedSLogIndex = index;
+		sLogListView.setCellFactory(param -> {
+			ListCell<SLogFile> cell = new ListCell<SLogFile>() {
+				@Override
+				protected void updateItem(SLogFile item, boolean empty) {
+					super.updateItem(item,empty);
+					if (item != null) {
+						setGraphic(item.getHBox(item.equals(sLogFiles[selectedSLogIndex])));
+					} else {
+						setGraphic(null);
+					}
+				}
+			};
 			
-			loadKeyLogs(selectedSLogIndex);
+			//one more reason we made a cell factory is to control the cells to that when clicked on empty nothing happens
+			cell.setOnMouseClicked((MouseEvent mouseEvent) -> {
+				if (cell.isEmpty()) mouseEvent.consume();
+			});
+			
+			return cell;
+		});
+		
+		sLogListView.setOnMouseClicked((mouseEvent) -> {
+			final SLogFile sLogFile = sLogListView.getSelectionModel().getSelectedItem();
+			
+			if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+				System.out.println("LEFT CLICKED x 2: " + sLogFile);//TODO remove
+				
+				int oldSelectedSLogIndex = selectedSLogIndex;
+				selectedSLogIndex = getSelectedSLogIndex();
+				
+				//for click then start on page 1 else if clicked the selected then should load same key log page
+				if (oldSelectedSLogIndex == selectedSLogIndex) sameSLogIndex = true;
+				else sameSLogIndex = false;
+				
+				reloadSLogPage();
+				loadKeyLogs(selectedSLogIndex);
+			} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+				System.out.println("RIGHT CLICKED: " + sLogFile);
+			}
 		});
 		
 		sLogPageTextField.textProperty().addListener((o,ov,nv) -> {
@@ -89,6 +121,7 @@ public class SnoopLogsController {
 		});
 		
 		loadSLogs();
+		setSLogPage(currentSLogPage);
 	}
 	
 	public void loadSLogs() {
@@ -101,9 +134,8 @@ public class SnoopLogsController {
 		
 		sLogFilesContents = FXCollections.observableArrayList();
 		
-		this.sLogPages = (int)Math.ceil((double)length / MAX_CONTENT_PER_PAGE);
+		this.sLogPages = (int)Math.ceil((double)length / MAX_SLOG_CONTENT_PER_PAGE);
 		sLogMaxPageLabel.setText("/" + sLogPages);
-		setSLogPage(currentSLogPage);
 	}
 	
 	public void setSLogPage(int page) {
@@ -122,8 +154,8 @@ public class SnoopLogsController {
 			sLogRightButton.setDisable(false);
 		}
 		
-		int start = (currentSLogPage - 1) * MAX_CONTENT_PER_PAGE;
-		int end = start + MAX_CONTENT_PER_PAGE;
+		int start = (currentSLogPage - 1) * MAX_SLOG_CONTENT_PER_PAGE;
+		int end = start + MAX_SLOG_CONTENT_PER_PAGE;
 		sLogFilesContents.clear(); //remove previous on list view
 		for (int i = start; i < sLogFiles.length && i < end; i++) {
 			sLogFilesContents.add(sLogFiles[i]);
@@ -135,12 +167,16 @@ public class SnoopLogsController {
 		loadKeyLogs(selectedSLogIndex);
 	}
 	
+	public void reloadSLogPage() {
+		setSLogPage(currentSLogPage);
+	}
+	
 	public void displaySLogs() {
 		sLogListView.setItems(sLogFilesContents);
 	}
 	
 	private int getSelectedSLogIndex() {
-		int start = (currentSLogPage - 1) * MAX_CONTENT_PER_PAGE;
+		int start = (currentSLogPage - 1) * MAX_SLOG_CONTENT_PER_PAGE;
 		int index = sLogListView.getSelectionModel().getSelectedIndex();
 		return start + index;
 	}
@@ -159,7 +195,9 @@ public class SnoopLogsController {
 	
 	@FXML
 	private void refreshSLogs() {
+		sameSLogIndex = true;
 		loadSLogs();
+		setSLogPage(currentSLogPage);
 	}
 	
 	public void loadKeyLogs(int index) {
@@ -168,7 +206,7 @@ public class SnoopLogsController {
 		sLogFileSelectedLabel.setText(sLogFile.toString());
 		
 		keyLogsContents = FXCollections.observableArrayList();
-		this.keyLogPages = (int)Math.ceil((double)sReader.getSnoopKeysSize() / MAX_CONTENT_PER_PAGE);
+		this.keyLogPages = (int)Math.ceil((double)sReader.getSnoopKeysSize() / MAX_KEYLOG_CONTENT_PER_PAGE);
 		keyLogMaxPageLabel.setText("/" + keyLogPages);
 		setKeyLogPage((sameSLogIndex) ? currentKeyLogPage : 1);
 	}
@@ -189,8 +227,8 @@ public class SnoopLogsController {
 			keyLogRightButton.setDisable(false);
 		}
 		
-		int start = (currentKeyLogPage - 1) * MAX_CONTENT_PER_PAGE;
-		int end = start + MAX_CONTENT_PER_PAGE;
+		int start = (currentKeyLogPage - 1) * MAX_KEYLOG_CONTENT_PER_PAGE;
+		int end = start + MAX_KEYLOG_CONTENT_PER_PAGE;
 		keyLogsContents.clear();
 		for (int i = start; i < sReader.getSnoopKeysSize() && i < end; i++) {
 			keyLogsContents.add(sReader.getSnoopKey(i));
