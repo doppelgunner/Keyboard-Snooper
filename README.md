@@ -20,6 +20,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **11** - Encapsulation: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_11), [youtube tutorial](https://youtu.be/ncZF_D8m0l8)
 * **12** - SnoopLog Reader: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_12), [youtube tutorial](https://youtu.be/Vead9l0PDrM)
 * **13** - JavaFX Pagination: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_13), [youtube tutorial](https://youtu.be/DGG8O-KHN6I)
+* **14** - JavaFX Pagination: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_14), [youtube tutorial](https://youtu.be/UVSnubkkbq0)
 
 
 ## How to compile and run
