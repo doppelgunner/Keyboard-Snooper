@@ -2,6 +2,7 @@ package com.snooper.app.controller;
 
 import com.snooper.*;
 import com.snooper.tray.*;
+import com.snooper.app.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -72,6 +73,45 @@ public class SnoopLogsController {
 				if (cell.isEmpty()) mouseEvent.consume();
 			});
 			
+			//context menu
+			ContextMenu contextMenu = new ContextMenu();
+			MenuItem selectMenuItem = new MenuItem("Select");
+			MenuItem openInDefaultMenuItem = new MenuItem("Open in default app");
+			MenuItem sendEmailMenuItem = new MenuItem("Send email");
+			MenuItem deleteFileMenuItem = new MenuItem("Delete");
+			
+			contextMenu.getItems().addAll(
+				selectMenuItem,
+				openInDefaultMenuItem,
+				sendEmailMenuItem,
+				deleteFileMenuItem
+			);
+			
+			selectMenuItem.setOnAction(event -> {
+				selectSLog();
+			});
+			
+			openInDefaultMenuItem.setOnAction(event -> {
+				Util.openFileDefault(cell.getItem().getFile());
+			});
+			
+			sendEmailMenuItem.setOnAction(event -> {
+				Util.notif(Snooper.TITLE,"Send email: Will be added in the future");
+			});
+			
+			deleteFileMenuItem.setOnAction(event -> {
+				cell.getItem().getFile().delete(); //this will not delete temp cause it is opened
+				refreshSLogs();
+			});
+			
+			cell.emptyProperty().addListener((o,wasEmpty,isEmpty) -> {
+				if (isEmpty) {
+					cell.setContextMenu(null);
+				} else {
+					cell.setContextMenu(contextMenu);
+				}
+			});
+			
 			return cell;
 		});
 		
@@ -81,17 +121,7 @@ public class SnoopLogsController {
 			if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
 				System.out.println("LEFT CLICKED x 2: " + sLogFile);//TODO remove
 				
-				int oldSelectedSLogIndex = selectedSLogIndex;
-				selectedSLogIndex = getSelectedSLogIndex();
-				
-				//for click then start on page 1 else if clicked the selected then should load same key log page
-				if (oldSelectedSLogIndex == selectedSLogIndex) sameSLogIndex = true;
-				else sameSLogIndex = false;
-				
-				reloadSLogPage();
-				loadKeyLogs(selectedSLogIndex);
-			} else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-				System.out.println("RIGHT CLICKED: " + sLogFile);
+				selectSLog();
 			}
 		});
 		
@@ -124,6 +154,19 @@ public class SnoopLogsController {
 		setSLogPage(currentSLogPage);
 	}
 	
+	private void selectSLog() {
+		int oldSelectedSLogIndex = selectedSLogIndex;
+		selectedSLogIndex = getSelectedSLogIndex();
+				
+		reloadSLogPage();
+		
+		//for click then start on page 1 else if clicked the selected then should load same key log page
+		if (oldSelectedSLogIndex == selectedSLogIndex) sameSLogIndex = true;
+		else sameSLogIndex = false;
+		
+		loadKeyLogs(selectedSLogIndex);
+	}
+	
 	public void loadSLogs() {
 		File[] files = Util.getSLogFiles(Snooper.FOLDER);
 		int length = files.length;
@@ -136,6 +179,16 @@ public class SnoopLogsController {
 		
 		this.sLogPages = (int)Math.ceil((double)length / MAX_SLOG_CONTENT_PER_PAGE);
 		sLogMaxPageLabel.setText("/" + sLogPages);
+		
+		//fix for an error
+		if (!Util.withinRange(1,sLogPages, currentSLogPage)) {
+			currentSLogPage = sLogPages;
+		}
+		
+		int endIndex = length - 1;
+		if (!Util.withinRange(0,endIndex, selectedSLogIndex)) {
+			selectedSLogIndex = endIndex;
+		}
 	}
 	
 	public void setSLogPage(int page) {

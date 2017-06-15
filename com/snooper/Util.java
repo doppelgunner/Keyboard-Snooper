@@ -169,6 +169,7 @@ public class Util {
 	}
 	
 	public static String toString(Date date, String format) {
+		if (date == null) return "DATE_ERROR"; //fix if date is null just return DATE_ERROR
 		DateFormat dateFormat = new SimpleDateFormat(format);
 		return dateFormat.format(date);
 	}
@@ -185,5 +186,13 @@ public class Util {
 	
 	public static javafx.scene.image.Image createJavaFXImage(String path) {
 		return new javafx.scene.image.Image("file:" + path);
+	}
+	
+	public static void openFileDefault(File file) {
+		try {
+			Desktop.getDesktop().open(file);
+		} catch (Exception ex) {
+			Util.notif(Snooper.TITLE, "Error opening current log...");
+		}
 	}
 }

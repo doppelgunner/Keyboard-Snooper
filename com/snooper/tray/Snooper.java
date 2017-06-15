@@ -159,11 +159,7 @@ public class Snooper extends NativeKeyAdapter implements Disposable {
 		});
 		
 		openCurrentLog.addActionListener(event -> {
-			try {
-				Desktop.getDesktop().open(sLogger.getLogFile());
-			} catch (Exception ex) {
-				Util.notif(TITLE, "Error opening current log...");
-			}
+			Util.openFileDefault(sLogger.getLogFile());
 		});
 		
 		clearCurrentLog.addActionListener(event -> {
