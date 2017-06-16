@@ -96,7 +96,8 @@ public class SnoopLogsController {
 			});
 			
 			sendEmailMenuItem.setOnAction(event -> {
-				Util.notif(Snooper.TITLE,"Send email: Will be added in the future");
+				Popup popup = new Popup(KSApplication.createLoader(Popup.EMAIL_POPUP_FXML));
+				popup.show();
 			});
 			
 			deleteFileMenuItem.setOnAction(event -> {

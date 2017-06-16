@@ -42,6 +42,10 @@ public class KSApplication extends Application {
 		return snoopLogsController;
 	}
 	
+	public static Stage getStage() {
+		return primaryStage;
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -56,19 +60,19 @@ public class KSApplication extends Application {
 		//Parent rootPref = FXMLLoader.load(getClass().getResource("/fxml/Pref.fxml"));
 		//Parent rootAbout = FXMLLoader.load(getClass().getResource("/fxml/About.fxml"));
 		
-		FXMLLoader loader = createLoader(getClass().getResource("/fxml/Main.fxml"));
+		FXMLLoader loader = createLoader("/fxml/Main.fxml");
 		Parent rootMain = loader.load();
 		mainController = loader.getController();
 		
-		loader = createLoader(getClass().getResource("/fxml/Pref.fxml"));
+		loader = createLoader("/fxml/Pref.fxml");
 		Parent rootPref = loader.load();
 		prefController = loader.getController();
 		
-		loader = createLoader(getClass().getResource("/fxml/About.fxml"));
+		loader = createLoader("/fxml/About.fxml");
 		Parent rootAbout = loader.load();
 		aboutController = loader.getController();
 		
-		loader = createLoader(getClass().getResource("/fxml/SnoopLogs.fxml"));
+		loader = createLoader("/fxml/SnoopLogs.fxml");
 		Parent rootSnoopLogs = loader.load();
 		snoopLogsController = loader.getController();
 		
@@ -95,7 +99,8 @@ public class KSApplication extends Application {
 		snooper.getPref().setController(getPrefController());
 	}
 	
-	public static FXMLLoader createLoader(URL url) {
+	public static FXMLLoader createLoader(String filepath) {
+		URL url = KSApplication.class.getResource(filepath);
 		FXMLLoader loader = new FXMLLoader(url);
 		return loader;
 	}
