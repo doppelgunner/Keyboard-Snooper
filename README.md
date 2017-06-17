@@ -23,6 +23,8 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **14** - JavaFX View Key Logs: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_14), [youtube tutorial](https://youtu.be/6JA-HImuM2g)
 * **15** - JavaFX Cell Factory: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_15), [youtube tutorial](https://youtu.be/KEGwOLwvtKI)
 * **16** - JavaFX Context Menu: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_16), [youtube tutorial](https://youtu.be/UVSnubkkbq0)
+* **17** - JavaFX Custom Popup: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_17), [youtube tutorial](https://youtu.be/qPyLfyflk_Q)
+
 
 
 ## How to compile and run
