@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.*;
 import javafx.scene.input.*;
 
-public class SnoopLogsController {
+public class SnoopLogsController extends Controller {
 	
 	@FXML ListView<SLogFile> sLogListView;
 	@FXML ListView<SnoopKey> keyLogsListView;
@@ -97,6 +97,7 @@ public class SnoopLogsController {
 			
 			sendEmailMenuItem.setOnAction(event -> {
 				Popup popup = new Popup(KSApplication.createLoader(Popup.EMAIL_POPUP_FXML));
+				popup.sendToController(cell.getItem());
 				popup.show();
 			});
 			

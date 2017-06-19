@@ -5,7 +5,7 @@ import com.snooper.app.*;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
-public class HomeBackController {
+public class HomeBackController extends Controller {
 	
 	@FXML private Button homeButton;
 	

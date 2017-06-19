@@ -4,7 +4,7 @@ import com.snooper.app.*;
 
 import javafx.fxml.FXML;
 
-public class MainController {
+public class MainController extends Controller {
 	
 	@FXML
 	public void initialize() {

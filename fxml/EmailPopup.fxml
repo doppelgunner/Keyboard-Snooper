@@ -5,15 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="208.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="208.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.EmailPopupController">
    <center>
       <VBox alignment="CENTER" prefHeight="217.0" prefWidth="319.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="272.0" spacing="10.0">
                <children>
                   <Label text="File:" />
-                  <Label text="filename.extension">
+                  <Label fx:id="filenameLabel" text="filename.extension">
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
@@ -23,14 +22,14 @@
             <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="315.0" spacing="10.0">
                <children>
                   <Label text="Email:" />
-                  <TextField prefHeight="35.0" prefWidth="188.0" promptText="youremail@sample.com">
+                  <TextField fx:id="emailTextField" prefHeight="35.0" prefWidth="188.0" promptText="youremail@sample.com">
                      <HBox.margin>
                         <Insets left="30.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="107.0" text="Send" />
+            <Button fx:id="sendEmailButton" mnemonicParsing="false" onAction="#sendEmail" prefHeight="57.0" prefWidth="107.0" text="Send" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />

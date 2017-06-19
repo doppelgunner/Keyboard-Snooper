@@ -10,6 +10,8 @@ import javafx.scene.layout.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 
+import java.nio.file.*;
+
 public class SLogFile {
 	
 	private String filepath;
@@ -83,5 +85,18 @@ public class SLogFile {
 		HBox bar = new HBox(imageView, new Label(toString()));
 		bar.setAlignment(Pos.CENTER_LEFT);
 		return bar;
+	}
+	
+	public void copyTo(File targetFile) {
+		try {
+			Files.copy(getFile().toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isTemp() {
+		if (filename.contains("temp")) return true;
+		else return false;
 	}
 }

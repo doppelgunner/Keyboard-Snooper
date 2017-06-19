@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.beans.value.*;
 
-public class PrefController {
+public class PrefController extends Controller {
 	
 	private Pref pref;
 	
