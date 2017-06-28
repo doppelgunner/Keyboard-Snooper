@@ -14,6 +14,7 @@ public class Popup {
 	private Parent root;
 	private Controller controller;
 	
+	public static final String ANALYZE_POPUP_FXML = "/fxml/AnalyzePopup.fxml";
 	public static final String EMAIL_POPUP_FXML = "/fxml/EmailPopup.fxml";
 	
 	public Popup(FXMLLoader loader) {
@@ -26,18 +27,25 @@ public class Popup {
 			Scene scene = new Scene(root);
 			
 			stage.setScene(scene);
+			stage.setResizable(false);
 			stage.sizeToScene();
 			
-			stage.setAlwaysOnTop(true);
 			stage.initOwner(KSApplication.getStage());
-			stage.initModality(Modality.WINDOW_MODAL);
 		} catch (Exception e) {
 			Util.notif(Snooper.TITLE, "Problem with popup...");
 		}
 	}
 	
-	public void show() {
+	public void showAndWait() {
+		stage.setAlwaysOnTop(true);
+		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.showAndWait();
+	}
+	
+	public void show() {
+		stage.setAlwaysOnTop(false);
+		stage.initModality(Modality.NONE);
+		stage.show();
 	}
 	
 	public void close() {

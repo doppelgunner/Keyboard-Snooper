@@ -99,4 +99,25 @@ public class SLogFile {
 		if (filename.contains("temp")) return true;
 		else return false;
 	}
+	
+	public boolean isValid() {
+		try (BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)))) {
+			String line;
+			int counter = 0;
+			String separator = SnoopReader.DEFAULT_SEPARATOR;
+			while((line = reader.readLine()) != null) {
+				String[] s = line.split(separator);
+				
+				if (line.contains(separator) && s.length == 2) {
+					return true;
+				}
+				
+				counter++;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Util.notif(Snooper.TITLE, "Problem loading file (SnoopReader): " + filepath);
+		}
+		return false;
+	}
 }

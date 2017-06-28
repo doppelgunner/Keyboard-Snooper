@@ -78,12 +78,14 @@ public class SnoopLogsController extends Controller {
 			MenuItem selectMenuItem = new MenuItem("Select");
 			MenuItem openInDefaultMenuItem = new MenuItem("Open in default app");
 			MenuItem sendEmailMenuItem = new MenuItem("Send email");
+			MenuItem analyzeMenuItem = new MenuItem("Analyze");
 			MenuItem deleteFileMenuItem = new MenuItem("Delete");
 			
 			contextMenu.getItems().addAll(
 				selectMenuItem,
 				openInDefaultMenuItem,
 				sendEmailMenuItem,
+				analyzeMenuItem,
 				deleteFileMenuItem
 			);
 			
@@ -98,7 +100,18 @@ public class SnoopLogsController extends Controller {
 			sendEmailMenuItem.setOnAction(event -> {
 				Popup popup = new Popup(KSApplication.createLoader(Popup.EMAIL_POPUP_FXML));
 				popup.sendToController(cell.getItem());
-				popup.show();
+				popup.showAndWait();
+			});
+			
+			analyzeMenuItem.setOnAction(event -> {
+				Popup popup = new Popup(KSApplication.createLoader(Popup.ANALYZE_POPUP_FXML));
+				SLogFile sLogFile = cell.getItem();
+				if (sLogFile.isValid()) {
+					popup.sendToController(sLogFile);
+					popup.show();
+				} else {
+					Util.notif("Failed to analyze, sLogFile is empty: " + sLogFile.getFilename());
+				}
 			});
 			
 			deleteFileMenuItem.setOnAction(event -> {

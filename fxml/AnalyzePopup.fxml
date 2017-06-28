@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.AnalyzePopupController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="filenameLabel" text="Filename.extension" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="121.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Speed" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="keysPerMinuteLabel" text="keys / minute">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <AreaChart fx:id="keysAreaChart" prefHeight="150.0" prefWidth="456.0">
+                          <xAxis>
+                            <NumberAxis fx:id="keysACMinutesNumberAxis" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="keysACQuantityNumberAxis" side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="121.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Most Typed Keys" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ListView fx:id="topTypedKeysListView" prefHeight="81.0" prefWidth="197.0" />
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <PieChart fx:id="topTypedKeysPieChart" prefHeight="124.0" prefWidth="194.0" title="Keys" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

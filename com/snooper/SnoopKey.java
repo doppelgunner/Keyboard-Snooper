@@ -2,15 +2,17 @@ package com.snooper;
 
 import com.snooper.tray.*;
 
+import java.util.*;
+
 public class SnoopKey {
 	
 	private int index;
-	private String date;
+	private String dateString;
 	private String key;
 	
-	public SnoopKey(int index, String date, String key) {
+	public SnoopKey(int index, String dateString, String key) {
 		this.index = index;
-		this.date = date;
+		this.dateString = dateString;
 		this.key = key;
 	}
 	
@@ -22,12 +24,16 @@ public class SnoopKey {
 		return key;
 	}
 	
-	public String getDate() {
-		return date;
+	public String getDateString() {
+		return dateString;
+	}
+	
+	public Date getDate() {
+		return Util.toDate(getDateString(), Snooper.fileNameFormat);
 	}
 	
 	public String toString() {
-		return "[" + index + "] - " + Util.toString(date,Snooper.fileNameFormat,Snooper.perHourFormat) + " :: " + key.toUpperCase();
+		return "[" + index + "] - " + Util.toString(dateString,Snooper.fileNameFormat,Snooper.perHourFormat) + " :: " + key.toUpperCase();
 	}
 	
 	public boolean hasSameKey(SnoopKey sKey) {

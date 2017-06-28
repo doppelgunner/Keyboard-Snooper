@@ -7,6 +7,8 @@ import java.util.*;
 
 public class SnoopReader {
 	
+	public static String DEFAULT_SEPARATOR = "::";
+	
 	private File logFile;
 	private List<SnoopKey> sKeys;
 	
@@ -21,7 +23,7 @@ public class SnoopReader {
 	}
 	
 	public SnoopReader(File file) {
-		this.separator = "::";
+		this.separator = DEFAULT_SEPARATOR;
 		sKeys = new ArrayList<SnoopKey>();
 		load(file);
 	}
@@ -81,5 +83,18 @@ public class SnoopReader {
 	
 	public int getSnoopKeysSize() {
 		return sKeys.size();
+	}
+	
+	public int getTypesPerMin() {
+		int keys = getSnoopKeysSize();
+		long duration = getSnoopKey(keys-1).getDate().getTime() - getSnoopKey(0).getDate().getTime();
+		long minutes = Util.getMinutes(duration);
+		
+		if (minutes <= 0) {
+			return keys;
+		}
+		
+		int keysPerMinute = (int)((double) keys / minutes + 0.5f);
+		return keysPerMinute;
 	}
 }

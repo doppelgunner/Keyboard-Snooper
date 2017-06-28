@@ -14,6 +14,8 @@ import javax.mail.*;
 import javax.activation.*;
 import javax.mail.internet.*;
 
+import java.util.concurrent.*;
+
 import com.google.gson.Gson;
 
 public class Util {
@@ -125,6 +127,10 @@ public class Util {
 		Pref pref = new Pref();
 		serialize_json(pref,Snooper.PREF_FILEPATH);
 		return pref;
+	}
+	
+	public static void notif(String message) {
+		notif(Snooper.TITLE, message);
 	}
 	
 	public static void notif(String title, String message) {
@@ -267,5 +273,13 @@ public class Util {
 			"Support me on patreon: https://patreon.com/doppelgunner \nor through paypal: https://www.paypal.me/doppelgunner",
 			sLogFile
 		);
+	}
+	
+	public static long getMinutes(long time) {
+		return TimeUnit.MILLISECONDS.toMinutes(time);
+	}
+	
+	public static long getMinutesStarting(long from, long to) {
+		return TimeUnit.MILLISECONDS.toMinutes(to - from);
 	}
 }
