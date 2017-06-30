@@ -27,6 +27,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **18** - Email Log File: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_18), [youtube tutorial](https://youtu.be/yYcqV_xK9wg)
 * **19** - JavaFX Background Task: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_19), [youtube tutorial](https://youtu.be/bkcOqwu5nu4)
 * **20** - JavaFX Analytics 1 - Area Chart: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_20), [youtube tutorial](https://youtu.be/QeJsckXk6jo)
+* **21** - JavaFX Analytics 2 - Pie Chart: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_21), [youtube tutorial](https://youtu.be/JoZxqRpsaDU)
 
 
 
