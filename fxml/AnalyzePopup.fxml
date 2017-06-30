@@ -47,9 +47,9 @@
                   <Label text="Most Typed Keys" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <ListView fx:id="topTypedKeysListView" prefHeight="81.0" prefWidth="197.0" />
+                        <ListView fx:id="topTypedKeysListView" maxHeight="128.0" prefHeight="128.0" prefWidth="197.0" />
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <PieChart fx:id="topTypedKeysPieChart" prefHeight="124.0" prefWidth="194.0" title="Keys" />
+                        <PieChart fx:id="topTypedKeysPieChart" prefHeight="150.0" prefWidth="384.0" title="Keys" />
                      </children>
                   </HBox>
                </children>

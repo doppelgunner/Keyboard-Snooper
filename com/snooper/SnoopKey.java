@@ -39,4 +39,14 @@ public class SnoopKey {
 	public boolean hasSameKey(SnoopKey sKey) {
 		return key.equals(sKey.getKey());
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return ((SnoopKey) o).key.equals(this.key);
+	}
+	
+	@Override
+	public int hashCode() {
+		return key.hashCode();
+	}
 }

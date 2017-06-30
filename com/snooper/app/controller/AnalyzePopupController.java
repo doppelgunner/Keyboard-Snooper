@@ -9,6 +9,8 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
 import javafx.util.*;
+import javafx.collections.*;
+import javafx.geometry.*;
 
 public class AnalyzePopupController extends Controller {
 	
@@ -48,6 +50,7 @@ public class AnalyzePopupController extends Controller {
 				snoopReader = new SnoopReader(sLogFile);
 				keysPerMinuteLabel.setText(String.format("%,d", snoopReader.getTypesPerMin()) + " keys/minute");
 				loadKeysLineChart();
+				loadTopCountsAnalytics();
 			}
 		});
 	}
@@ -109,5 +112,32 @@ public class AnalyzePopupController extends Controller {
 		));
 		
 		keysAreaChart.getData().add(keysACSeries);
+	}
+	
+	private void loadTopCountsAnalytics() {
+		List<Map.Entry<SnoopKey,Integer>> topList = snoopReader.getCountsDescending();
+		int limit = 5;
+		
+		ObservableList<SnoopKeyCount> keyCountsContents = FXCollections.observableArrayList();
+		
+		double totalKeyCounts = snoopReader.getSnoopKeysSize();
+		int top5 = 0;
+		
+		for (int i = 0; i < 5 && i < topList.size(); i++) {
+			Map.Entry<SnoopKey,Integer> entry = topList.get(i);
+			SnoopKeyCount skc = new SnoopKeyCount(entry.getKey().getKey(), entry.getValue()); //get key of entry then get key of snoopkey
+			keyCountsContents.add(skc);
+			PieChart.Data data = new PieChart.Data(skc.getKey(), (skc.getCount() / totalKeyCounts) * 100);
+			topTypedKeysPieChart.getData().add(data);
+			top5 += skc.getCount();
+		}
+		PieChart.Data otherData = new PieChart.Data("Others", ((totalKeyCounts - top5) / totalKeyCounts) * 100);
+		topTypedKeysPieChart.getData().add(otherData);
+		
+		topTypedKeysListView.setItems(keyCountsContents);
+		
+		topTypedKeysPieChart.setStartAngle(180);
+		topTypedKeysPieChart.setLabelsVisible(false);
+		topTypedKeysPieChart.setLegendSide(Side.LEFT);
 	}
 }

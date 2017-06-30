@@ -97,4 +97,33 @@ public class SnoopReader {
 		int keysPerMinute = (int)((double) keys / minutes + 0.5f);
 		return keysPerMinute;
 	}
+	
+	public Map getCounts() {
+		Map<SnoopKey, Integer> map = new HashMap<>();
+		for (int i = 0; i < getSnoopKeysSize(); i++) {
+			SnoopKey sKey = getSnoopKey(i);
+			Integer storedValue = map.get(sKey);
+			if (storedValue != null) {
+				map.put(sKey,++storedValue);
+			}  else {
+				map.put(sKey,1);
+			}
+		}
+		
+		return map;
+	}
+	
+	public List<Map.Entry<SnoopKey,Integer>> getCountsDescending() {
+		List<Map.Entry<SnoopKey,Integer>> sortedEntries = new ArrayList<Map.Entry<SnoopKey,Integer>>(getCounts().entrySet());
+		
+		Collections.sort(sortedEntries,
+			new Comparator<Map.Entry<SnoopKey,Integer>>() {
+			@Override
+			public int compare(Map.Entry<SnoopKey,Integer> e1, Map.Entry<SnoopKey,Integer> e2) {
+				return e2.getValue().compareTo(e1.getValue());
+			}
+		});
+		
+		return sortedEntries;
+	}
 }
