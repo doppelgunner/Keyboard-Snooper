@@ -37,7 +37,6 @@ public class AnalyzePopupController extends Controller {
 	public void send(Object data) {
 		if (data instanceof SLogFile) {
 			sLogFile = (SLogFile) data;
-			filenameLabel.setText(sLogFile.toString());
 		}
 	}
 	
@@ -48,6 +47,7 @@ public class AnalyzePopupController extends Controller {
 		stage.setOnShown(event -> {
 			if (ok()) {
 				snoopReader = new SnoopReader(sLogFile);
+				filenameLabel.setText(sLogFile.toString() + " --- KEY COUNT: " + snoopReader.getSnoopKeysSize());
 				keysPerMinuteLabel.setText(String.format("%,d", snoopReader.getTypesPerMin()) + " keys/minute");
 				loadKeysLineChart();
 				loadTopCountsAnalytics();
@@ -90,6 +90,8 @@ public class AnalyzePopupController extends Controller {
 		
 		int bound = 0;
 		int counter = 0;
+		
+		ObservableList<XYChart.Data<Number,Number>> keysACContents = FXCollections.observableArrayList();
 		for (int i = 0; i < keysLength; i++) {
 			SnoopKey sKey = snoopReader.getSnoopKey(i);
 			
@@ -98,20 +100,20 @@ public class AnalyzePopupController extends Controller {
 			if (minute == bound) {
 				counter++;
 			} else {
-				keysACSeries.getData().add(new XYChart.Data<Number,Number>(
-					bound,
-					counter
-				));
+				XYChart.Data data = new XYChart.Data<Number,Number>(bound,counter);
+				keysACContents.add(data);
 				bound++;
 				counter = 0;
 			}
 		}
-		keysACSeries.getData().add(new XYChart.Data<Number,Number>(
-			bound,
-			counter
-		));
-		
-		keysAreaChart.getData().add(keysACSeries);
+		XYChart.Data lastData = new XYChart.Data<Number,Number>(bound,counter);
+		keysACContents.add(lastData);
+		keysACSeries.setData(keysACContents);
+		keysAreaChart.getData().add(keysACSeries); //must do this before adding tooltip (to create nodes on data)
+		for (int i = 0; i < keysACContents.size(); i++) {
+			XYChart.Data data = keysACContents.get(i);
+			Util.addTooltip(data.getNode(), "Keys: " + data.getYValue().toString() + "\nMinute: " + data.getXValue());
+		}
 	}
 	
 	private void loadTopCountsAnalytics() {
@@ -122,20 +124,25 @@ public class AnalyzePopupController extends Controller {
 		
 		double totalKeyCounts = snoopReader.getSnoopKeysSize();
 		int top5 = 0;
-		
+		ObservableList<PieChart.Data> dataContents = FXCollections.observableArrayList();
 		for (int i = 0; i < 5 && i < topList.size(); i++) {
 			Map.Entry<SnoopKey,Integer> entry = topList.get(i);
 			SnoopKeyCount skc = new SnoopKeyCount(entry.getKey().getKey(), entry.getValue()); //get key of entry then get key of snoopkey
 			keyCountsContents.add(skc);
 			PieChart.Data data = new PieChart.Data(skc.getKey(), (skc.getCount() / totalKeyCounts) * 100);
-			topTypedKeysPieChart.getData().add(data);
+			dataContents.add(data);
 			top5 += skc.getCount();
 		}
 		PieChart.Data otherData = new PieChart.Data("Others", ((totalKeyCounts - top5) / totalKeyCounts) * 100);
-		topTypedKeysPieChart.getData().add(otherData);
+		dataContents.add(otherData);
+		
+		topTypedKeysPieChart.setData(dataContents);
+		for (int i = 0; i < dataContents.size(); i++) {
+			PieChart.Data data = dataContents.get(i);
+			Util.addTooltip(data.getNode(), String.format("%.2f%%", data.getPieValue()));
+		}
 		
 		topTypedKeysListView.setItems(keyCountsContents);
-		
 		topTypedKeysPieChart.setStartAngle(180);
 		topTypedKeysPieChart.setLabelsVisible(false);
 		topTypedKeysPieChart.setLegendSide(Side.LEFT);

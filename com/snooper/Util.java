@@ -13,8 +13,9 @@ import java.util.regex.*;
 import javax.mail.*;
 import javax.activation.*;
 import javax.mail.internet.*;
-
 import java.util.concurrent.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
 
 import com.google.gson.Gson;
 
@@ -281,5 +282,10 @@ public class Util {
 	
 	public static long getMinutesStarting(long from, long to) {
 		return TimeUnit.MILLISECONDS.toMinutes(to - from);
+	}
+	
+	public static void addTooltip(Node node, String msg) {
+		Tooltip tooltip = new Tooltip(msg);
+		Tooltip.install(node,tooltip);
 	}
 }
