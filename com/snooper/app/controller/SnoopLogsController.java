@@ -27,8 +27,8 @@ public class SnoopLogsController extends Controller {
 	@FXML Label sLogFileSelectedLabel;
 	@FXML TextField keyLogPageTextField;
 	
-	public static final int MAX_KEYLOG_CONTENT_PER_PAGE = 10;
-	public static final int MAX_SLOG_CONTENT_PER_PAGE = 6;
+	public static final int MAX_KEYLOG_CONTENT_PER_PAGE = 8;
+	public static final int MAX_SLOG_CONTENT_PER_PAGE = 5;
 	
 	private ObservableList<SLogFile> sLogFilesContents;
 	private SLogFile[] sLogFiles;

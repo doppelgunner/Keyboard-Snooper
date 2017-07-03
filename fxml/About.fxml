@@ -6,22 +6,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:controller="com.snooper.app.controller.AboutController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.AboutController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox>
          <children>
-            <fx:include source="HomeBack.fxml" />
-            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+            <fx:include source="TitleBar.fxml" />
+            <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="About">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
+                  <fx:include source="HomeBack.fxml" />
+                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+                     <children>
+                        <Label text="About">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
-      </HBox>
+      </VBox>
    </top>
    <bottom>
       <fx:include source="Footer.fxml" />

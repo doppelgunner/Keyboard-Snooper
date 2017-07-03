@@ -19,7 +19,7 @@ public class Popup {
 	
 	public Popup(FXMLLoader loader) {
 		try {
-			stage = new Stage(StageStyle.UTILITY);
+			stage = new Stage(StageStyle.TRANSPARENT);
 			root = loader.load();
 			controller = loader.getController();
 			controller.setStage(stage);

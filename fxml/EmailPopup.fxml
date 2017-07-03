@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="208.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.EmailPopupController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.EmailPopupController">
    <center>
       <VBox alignment="CENTER" prefHeight="217.0" prefWidth="319.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,4 +36,7 @@
          </padding>
       </VBox>
    </center>
+   <top>
+      <fx:include source="TitleBar.fxml" />
+   </top>
 </BorderPane>

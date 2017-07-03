@@ -8,20 +8,25 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.SnoopLogsController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox>
          <children>
-            <fx:include source="HomeBack.fxml" />
-            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+            <fx:include source="TitleBar.fxml" />
+            <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="SnoopLogs">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
+                  <fx:include source="HomeBack.fxml" />
+                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+                     <children>
+                        <Label text="SnoopLogs">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
-      </HBox>
+      </VBox>
    </top>
    <bottom>
       <fx:include source="Footer.fxml" />
@@ -31,7 +36,7 @@
         <items>
             <VBox prefHeight="284.0" prefWidth="204.0">
                <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="175.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="199.0">
                      <children>
                         <ListView fx:id="sLogListView" layoutX="-39.0" layoutY="14.0" prefHeight="250.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
@@ -53,7 +58,7 @@
             </VBox>
             <VBox>
                <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="417.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="393.0">
                      <children>
                         <ListView fx:id="keyLogsListView" layoutX="80.0" layoutY="41.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>

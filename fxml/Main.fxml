@@ -8,18 +8,23 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.MainController">
    <top>
-      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox>
          <children>
-            <Label text="Keyboard Snooper">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
+            <fx:include source="TitleBar.fxml" />
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Keyboard Snooper">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
+      </VBox>
    </top>
    <bottom>
       <fx:include source="Footer.fxml" />

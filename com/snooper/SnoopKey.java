@@ -42,6 +42,7 @@ public class SnoopKey {
 	
 	@Override
 	public boolean equals(Object o) {
+		if (o == null) return false;
 		return ((SnoopKey) o).key.equals(this.key);
 	}
 	
