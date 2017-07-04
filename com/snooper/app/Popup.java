@@ -8,6 +8,8 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
 
+import javafx.scene.paint.*;
+
 public class Popup {
 	
 	private Stage stage;
@@ -25,6 +27,8 @@ public class Popup {
 			controller.setStage(stage);
 			
 			Scene scene = new Scene(root);
+			scene.setFill(Color.TRANSPARENT);
+			KSApplication.addStylesheet(scene, KSApplication.DEFAULT_CSS);
 			
 			stage.setScene(scene);
 			stage.setResizable(false);

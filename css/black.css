@@ -1,0 +1,65 @@
+
+/*base*/
+.root_parent {
+	-fx-effect: dropshadow(three-pass-box, #888, 15,0,0,0);
+	-fx-background-insets: 10;
+}
+.root {
+	-fx-base: #000;
+	-fx-accent: #555;
+	-fx-focus-color: #444;
+	-fx-faint-focus-color: #444;
+}
+
+/*buttons*/
+.button {
+	-fx-background-radius: 50;
+}
+#x_button {
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
+	-fx-background-image: url('/images/x_PLAIN.png');
+	-fx-background-size: 15px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+#x_button:hover {
+	-fx-background-image: url('/images/x_HOVERED.png');
+}
+#back_button {
+	-fx-background-image: url('/images/back_button.png');
+	-fx-background-size: 24px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-text-fill: transparent;
+}
+
+/*list view's list cells*/
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+	-fx-background-color: #000;
+	-fx-text-fill: #fff;
+}
+.list-cell:even {
+	-fx-background-color: #bbb;
+}
+.list-cell:odd {
+	-fx-background-color: #ccc;
+}
+
+/*context menu items*/
+.menu-item .label {
+	-fx-text-fill: #000;
+}
+.menu-item:focused {
+	-fx-background-color: #000;
+}
+.menu-item:focused .label {
+	-fx-text-fill: #fff;
+}
+.menu-item {
+	-fx-background-color: #ccc;
+}
+.context-menu {
+	-fx-background-color: #ccc;
+	-fx-border-color: #000;
+}

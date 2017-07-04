@@ -28,7 +28,7 @@ public class TitleBarController extends Controller {
 		setIcon(Util.createJavaFXImage("images/snooper.png"));
 		
 		//later we will use css instead of this
-		setXButton(); //TODO delete
+		//setXButton(); //TODO delete
 	}
 	
 	private double mx, my;

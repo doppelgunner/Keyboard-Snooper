@@ -4,4 +4,4 @@
 <?import javafx.scene.control.*?>
 
 
-<Button fx:controller="com.snooper.app.controller.HomeBackController" fx:id="homeButton" mnemonicParsing="false" onAction="#goHome" prefHeight="57.0" prefWidth="57.0" text="Home" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<Button id="back_button" fx:id="homeButton" mnemonicParsing="false" onAction="#goHome" prefHeight="57.0" prefWidth="57.0" text="Home" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.snooper.app.controller.HomeBackController" />
