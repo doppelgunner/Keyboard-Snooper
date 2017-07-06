@@ -30,6 +30,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **21** - JavaFX Analytics 2 - Pie Chart: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_21), [youtube tutorial](https://youtu.be/JoZxqRpsaDU)
 * **22** - JavaFX Tooltips: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_22), [youtube tutorial](https://youtu.be/Mtgt_7ePmc4)
 * **23** - JavaFX Custom Title Bar: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_23), [youtube tutorial](https://youtu.be/UzbqiAfqTKg)
+* **24** - JavaFX Adding CSS: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_24), [youtube tutorial](https://youtu.be/yrTuQFEhupQ)
 
 
 
