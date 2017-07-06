@@ -28,7 +28,8 @@ public class Popup {
 			
 			Scene scene = new Scene(root);
 			scene.setFill(Color.TRANSPARENT);
-			KSApplication.addStylesheet(scene, KSApplication.DEFAULT_CSS);
+	
+			KSApplication.addStylesheet(scene, Snooper.getInstance().getPref().getStylesheet());
 			
 			stage.setScene(scene);
 			stage.setResizable(false);

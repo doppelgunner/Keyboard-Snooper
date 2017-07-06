@@ -1,6 +1,7 @@
 package com.snooper;
 
 import com.snooper.app.controller.*;
+import com.snooper.app.*;
 
 import javafx.beans.property.*;
 import java.io.*;
@@ -13,6 +14,7 @@ public class Pref implements Serializable {
 	private String nickname;
 	private boolean iconImageAutoSize;
 	private boolean notifBalloon;
+	private File stylesheetFile;
 	
 	private transient PrefController prefController;
 	private transient BooleanProperty iconImageAutoSizeProperty;
@@ -22,11 +24,24 @@ public class Pref implements Serializable {
 		nickname = System.getProperty("user.name");
 		iconImageAutoSize = true;
 		notifBalloon = true;
+		stylesheetFile = new File(KSApplication.STYLE_FOLDER + "/" + KSApplication.DEFAULT_STYLE);
 	}
 	
 	public void init() {
 		iconImageAutoSizeProperty = new SimpleBooleanProperty(iconImageAutoSize);
 		notifBalloonProperty = new SimpleBooleanProperty(notifBalloon);
+	}
+	
+	public void setStylesheetFile(File stylesheetFile) {
+		this.stylesheetFile = stylesheetFile;
+	}
+	
+	public File getStylesheetFile() {
+		return stylesheetFile;
+	}
+	
+	public String getStylesheet() {
+		return getStylesheetFile().getPath().replace('\\','/'); //important to replace slash
 	}
 	
 	public void setController(PrefController prefController) {
@@ -104,6 +119,7 @@ public class Pref implements Serializable {
 		sb.append("\tnickname: " + nickname + "\n");
 		sb.append("\ticonImageAutoSize: " + iconImageAutoSize + "\n");
 		sb.append("\tnotifBalloon: " + notifBalloon + "\n");
+		sb.append("\tcss: " + stylesheetFile.getName() + "\n");
 		sb.append("}");
 		return sb.toString();
 	}

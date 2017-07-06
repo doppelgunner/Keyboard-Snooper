@@ -23,7 +23,7 @@
                   </HBox>
                   <HBox fx:id="buttonsHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Button id="x_button" mnemonicParsing="false" onAction="#x" prefHeight="30.0" prefWidth="30.0" fx:id="xButton" />
+                        <Button id="x_button" mnemonicParsing="false" onAction="#x" prefHeight="30.0" prefWidth="30.0" text="X" fx:id="xButton" />
                      </children>
                      <padding>
                         <Insets left="10.0" right="10.0" />

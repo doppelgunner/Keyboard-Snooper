@@ -18,7 +18,9 @@ import javafx.scene.paint.*;
 public class KSApplication extends Application {
 	
 	public static final int WIDTH = 660, HEIGHT = 420;
-	public static final String DEFAULT_CSS = "css/black.css";
+	public static final String STYLE_FOLDER = "css";
+	public static final String DEFAULT_STYLE = "black.css";
+	public static final String STYLE_EXTENSION = ".css";
 	
 	private static Stage primaryStage;
 	private static Scene mainScene, prefScene, aboutScene, snoopLogsScene;
@@ -86,8 +88,6 @@ public class KSApplication extends Application {
 		aboutScene = new Scene(rootAbout, WIDTH, HEIGHT);
 		snoopLogsScene = new Scene(rootSnoopLogs, WIDTH, HEIGHT);
 		
-		loadStyles();
-		
 		//stage configs
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		primaryStage.getIcons().add(Util.createJavaFXImage("images/snooper.png"));
@@ -99,19 +99,32 @@ public class KSApplication extends Application {
 		Platform.setImplicitExit(false); //use to hide only when x is pressed in the menu bar
 		
 		setSnooper();
+		loadStyles();
 	}
 	
-	private void loadStyles() {
-		addStylesheet(mainScene,DEFAULT_CSS);
-		addStylesheet(prefScene,DEFAULT_CSS);
-		addStylesheet(aboutScene,DEFAULT_CSS);
-		addStylesheet(snoopLogsScene,DEFAULT_CSS);
+	private static void loadStyles() {
+		loadStylesheets();
 		
 		//for the drop shadow
 		mainScene.setFill(Color.TRANSPARENT);
 		prefScene.setFill(Color.TRANSPARENT);
 		aboutScene.setFill(Color.TRANSPARENT);
 		snoopLogsScene.setFill(Color.TRANSPARENT);
+	}
+	
+	public static void loadStylesheets() {
+		String css = snooper.getPref().getStylesheet();
+		addStylesheet(mainScene,css);
+		addStylesheet(prefScene,css);
+		addStylesheet(aboutScene,css);
+		addStylesheet(snoopLogsScene,css);
+	}
+	
+	public static void removeStylesheets() {
+		mainScene.getStylesheets().clear();
+		prefScene.getStylesheets().clear();
+		aboutScene.getStylesheets().clear();
+		snoopLogsScene.getStylesheets().clear();
 	}
 	
 	public static void addStylesheet(Scene scene, String filepath) {

@@ -1,15 +1,17 @@
 /*constants*/
 {
-	-fx-primary: #000;
-	-fx-primary2: #fff;
+	-fx-primary: #8B0000;
+	-fx-primary2: #3c0000;
 	
-	-fx-secondary:#bbb;
-	-fx-secondary2:#ccc;
+	-fx-secondary: rgb(190,38,38);
+	-fx-secondary2: rgb(206,52,52);
 	
-	-fx-shadow: #888;
+	-fx-color-white: #fff;
 	
-	-fx-acc: #555;
-	-fx-foc: #444;
+	-fx-shadow: #e75a5a;
+	
+	-fx-acc: #ff8c8c;
+	-fx-foc: #ff8c8c;
 }
 
 /*base*/
@@ -51,42 +53,42 @@
 /*list view's list cells*/
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
 	-fx-background-color: -fx-primary;
-	-fx-text-fill: -fx-primary2;
+	-fx-text-fill: -fx-color-white;
 }
 .list-cell:filled:selected:focused .label, .list-cell:filled:selected .label {
-	-fx-text-fill: -fx-primary2;
+	-fx-text-fill: -fx-color-white;
 }
 .list-cell:even {
 	-fx-background-color: -fx-secondary;
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-color-white;
 }
 .list-cell:even .label {
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-color-white;
 }
 .list-cell:odd {
 	-fx-background-color: -fx-secondary2;
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-color-white;
 }
 .list-cell:odd .label {
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-color-white;
 }
 
 /*context menu items*/
 .menu-item .label {
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-color-white;
 }
 .menu-item:focused {
 	-fx-background-color: -fx-primary;
 }
 .menu-item:focused .label {
-	-fx-text-fill: -fx-primary2;
+	-fx-text-fill: -fx-color-white;
 }
 .menu-item {
 	-fx-background-color: -fx-secondary2;
 }
 .context-menu {
 	-fx-background-color: -fx-secondary2;
-	-fx-border-color: -fx-primary;
+	-fx-border-color: -fx-color-white;
 }
 
 /*combo box*/
@@ -95,9 +97,9 @@
 }
 .combo-box-popup .list-view .list-cell:hover {
 	-fx-background-color: -fx-primary;
-	-fx-text-fill: -fx-primary2;
+	-fx-text-fill: -fx-color-white;
 }
 .combo-box .cell:selected {
 	-fx-background-color: -fx-primary;
-	-fx-text-fill: -fx-primary2;
+	-fx-text-fill: -fx-color-white;
 }

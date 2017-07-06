@@ -140,10 +140,18 @@ public class Util {
 		pref.notif(snooper.getTrayIcon(), title, message);
 	}
 	
-	public static File[] getSLogFiles(File parentDir) {
+	public static File[] getFiles(String parentDir, String extension) {
+		return getFiles(new File(parentDir), extension);
+	}
+	
+	public static File[] getFiles(File parentDir, String extension) {
 		return parentDir.listFiles((dir,name) -> {
-			return name.toLowerCase().endsWith(Snooper.EXTENSION_NAME);
+			return name.toLowerCase().endsWith(extension);
 		});
+	}
+	
+	public static File[] getSLogFiles(File parentDir) {
+		return getFiles(parentDir, Snooper.EXTENSION_NAME);
 	}
 	
 	public static File[] getSLogFiles(String parentDir) {
@@ -287,5 +295,14 @@ public class Util {
 	public static void addTooltip(Node node, String msg) {
 		Tooltip tooltip = new Tooltip(msg);
 		Tooltip.install(node,tooltip);
+	}
+	
+	public static String removeExtension(String filename) {
+		int pos = filename.lastIndexOf(".");
+		if (pos > 0) {
+			return filename.substring(0, pos);
+		}
+		
+		return null;
 	}
 }

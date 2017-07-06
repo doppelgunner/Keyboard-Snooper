@@ -1,15 +1,15 @@
 /*constants*/
 {
-	-fx-primary: #000;
-	-fx-primary2: #fff;
+	-fx-primary: #fff;
+	-fx-primary2: #000;
 	
-	-fx-secondary:#bbb;
-	-fx-secondary2:#ccc;
+	-fx-secondary:#aaa;
+	-fx-secondary2:#bbb;
 	
 	-fx-shadow: #888;
 	
-	-fx-acc: #555;
-	-fx-foc: #444;
+	-fx-acc: #ddd;
+	-fx-foc: #ccc;
 }
 
 /*base*/
@@ -46,6 +46,10 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-text-fill: transparent;
+	-fx-background-color: #ddd;
+}
+#back_button:hover {
+	-fx-background-color: #ccc;
 }
 
 /*list view's list cells*/
