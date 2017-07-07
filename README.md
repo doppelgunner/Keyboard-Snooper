@@ -32,6 +32,7 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **23** - JavaFX Custom Title Bar: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_23), [youtube tutorial](https://youtu.be/UzbqiAfqTKg)
 * **24** - JavaFX Adding CSS: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_24), [youtube tutorial](https://youtu.be/yrTuQFEhupQ)
 * **25** - JavaFX Changing Theme: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_25), [youtube tutorial](https://youtu.be/IYZH2dESjxg)
+* **26** - JavaFX Deploy - Jar File: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_26), [youtube tutorial](https://youtu.be/P2OuIFfdD4s)
 
 
 
