@@ -40,7 +40,9 @@ Below are the link to source code and youtube tutorial separated by Episodes
   * RUN: java -cp ".;lib/*" com.snooper.tray.Snooper
   * RUN without console: javaw -cp ".;lib/jnativehook-2.1.0.jar;" com.snooper.tray.Snooper
   * RUN TEST ONLY: java -cp ".;lib/*" com.snooper.tray.Snooper test
-
+  * COMPILE AND MOVE TO CLASSES folder (classes only no source): javac -cp ".;lib/*" com/snooper/*.java com/snooper/tray/*.java com/snooper/app/*.java com/snooper/app/controller/*.java -d classes
+  * MAKE JAR FILE: jar cvfm Snooper.jar MANIFEST.txt fxml -C classes/ .
+  
 ## My Accounts 
   * [blogspot](http://doppelgunner.blogspot.com/)
   * [patreon](https://www.patreon.com/doppelgunner)
