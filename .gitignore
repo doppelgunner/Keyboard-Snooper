@@ -18,3 +18,5 @@ hs_err_pid*
 
 #ignore build
 Snooper.jar
+*.jsmooth
+*.exe
