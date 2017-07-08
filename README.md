@@ -25,6 +25,9 @@ Below are the link to source code and youtube tutorial separated by Episodes
 * **16** - JavaFX Context Menu: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_16), [youtube tutorial](https://youtu.be/UVSnubkkbq0)
 * **17** - JavaFX Custom Popup: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_17), [youtube tutorial](https://youtu.be/qPyLfyflk_Q)
 * **18** - Email Log File: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_18), [youtube tutorial](https://youtu.be/yYcqV_xK9wg)
+  * Important note: you maybe want to delete the file in sent email after you sent it. This is to avoid Phishing. 
+  * Check this new source code that I included in sendEmail (I added some codes). I added deleteMessages() method: https://github.com/doppelgunner/Keyboard-Snooper/blob/v1.0.1/com/snooper/Util.java
+  * Check this gist also for steps in gmail and source of method: https://gist.github.com/doppelgunner/c7ab8b982d958245c95f033b0329e17c
 * **19** - JavaFX Background Task: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_19), [youtube tutorial](https://youtu.be/bkcOqwu5nu4)
 * **20** - JavaFX Analytics 1 - Area Chart: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_20), [youtube tutorial](https://youtu.be/QeJsckXk6jo)
 * **21** - JavaFX Analytics 2 - Pie Chart: [source code](https://github.com/doppelgunner/Keyboard-Snooper/tree/Snooper_21), [youtube tutorial](https://youtu.be/JoZxqRpsaDU)
