@@ -299,6 +299,8 @@ public class Util {
 			
 			Store store = emailSession.getStore(storeType);
 			store.connect(imapHost, user, password);
+			
+			/*Use this to check all folder
 			Folder[] f = store.getDefaultFolder().list();
 			for(Folder fd:f) {
 				Folder[] fc = fd.list();
@@ -306,18 +308,17 @@ public class Util {
 					System.out.println(fc1);
 				}
 			}
+			*/
 			
 			Folder emailFolder = store.getFolder(folder);
 			emailFolder.open(Folder.READ_WRITE);
 			
-			/*Use this to check all folder
 			Message[] messages = emailFolder.getMessages();
 			System.out.println("MESSAGES: " + messages.length);
 			for (int i = 0; i < messages.length; i++) {
 				Message message = messages[i];
 				message.setFlag(Flags.Flag.DELETED, true);
 			}
-			*/
 			
 			//closes all messages marked deleted
 			emailFolder.close(true);
