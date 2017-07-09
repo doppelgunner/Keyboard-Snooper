@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -14,7 +15,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <fx:include source="HomeBack.fxml" />
-                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="543.0">
+                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="547.0">
                      <children>
                         <Label text="About">
                            <font>
@@ -32,9 +33,9 @@
       <fx:include source="Footer.fxml" />
    </bottom>
    <center>
-      <VBox alignment="TOP_CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="198.0" prefWidth="561.0">
          <children>
-            <FlowPane alignment="CENTER" prefHeight="71.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="A simple keystroke logger program made by" />
                   <Hyperlink onAction="#goGithub" text="doppelgunner" />
@@ -46,24 +47,37 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </padding>
             </FlowPane>
-            <Label text="My Accounts" />
-            <FlowPane hgap="50.0" prefHeight="55.0" prefWidth="600.0" vgap="30.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="600.0" spacing="30.0">
                <children>
-                  <Hyperlink onAction="#goBlog" text="o My Blog" />
-                  <Hyperlink onAction="#goYoutube" text="o Youtube" />
-                  <Hyperlink onAction="#goTwitter" text="o Twitter" />
-                  <Hyperlink onAction="#goInstagram" text="o instagram" />
-                  <Hyperlink onAction="#goItch" text="o itch.io" />
+                  <Label text="DONATIONS:" />
+                  <Hyperlink onAction="#goPatreon">
+                     <graphic>
+                        <ImageView fx:id="patreonImageView" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Hyperlink>
+                  <Hyperlink onAction="#goPaypal">
+                     <graphic>
+                        <ImageView fx:id="paypalImageView" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Hyperlink>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                  <Insets left="30.0" />
                </padding>
-            </FlowPane>
-            <Hyperlink onAction="#goSourceCode" text="Source code here">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </Hyperlink>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="30.0">
+               <children>
+                  <Label text="SOURCE CODE: " />
+                  <Hyperlink onAction="#goSourceCode">
+                     <graphic>
+                        <ImageView fx:id="sourceCodeImageView" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Hyperlink>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
    </center>

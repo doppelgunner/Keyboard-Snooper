@@ -101,3 +101,8 @@
 	-fx-background-color: -fx-primary;
 	-fx-text-fill: -fx-primary2;
 }
+
+/*links*/
+.link_patreon_image {
+	-fx-background-image: url('/images/x_PLAIN.png');
+}
